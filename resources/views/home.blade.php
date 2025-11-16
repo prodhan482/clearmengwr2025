@@ -1,72 +1,226 @@
-@extends('layouts.app')
+
+
+
+@extends('layouts.web.layouts')
+
+@section('title', 'Home | Clear Men Guinness World Records')
+
 @section('content')
-    <!-- Hero Section with 3D Animation -->
-    <section
-        class="relative h-[400px] flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold mb-2">Clearmen Guinness World Record</h1>
-            <p class="text-lg">Join the record-breaking event!</p>
-        </div>
-        <canvas id="hero-canvas" class="absolute inset-0"></canvas>
-    </section>
 
+    <section class="hero-section hero-section-full-height">
+        <div class="container-fluid">
+            <div class="row">
 
-    <!-- Registration Form -->
-    <section class="py-10 bg-gray-100">
-        <div class="container mx-auto">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Register Now</h2>
-            <form action="{{ route('register.store') }}" method="POST"
-                class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow">
-                @csrf
-                <div class="mb-4"><label>Serial Number</label><input type="number" name="serial_number" class="input">
+                <div class="col-lg-12 col-12 p-0">
+                    <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="assets/images/slide/slide1.jpg" class="carousel-image img-fluid" alt="...">
+
+                                <div class="carousel-caption d-flex flex-column justify-content-end">
+                                    <h1>be a Kind Heart</h1>
+
+                                    <p>Professional charity theme based on Bootstrap 5.2.2</p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <img src="assets/images/slide/slide2.png" class="carousel-image img-fluid" alt="...">
+
+                                <div class="carousel-caption d-flex flex-column justify-content-end">
+                                    <h1>Non-profit</h1>
+
+                                    <p>You can support us to grow more</p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <img src="assets/images/slide/slide3.jpg" class="carousel-image img-fluid" alt="...">
+
+                                <div class="carousel-caption d-flex flex-column justify-content-end">
+                                    <h1>Humanity</h1>
+
+                                    <p>Please tell your friends about our website</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#hero-slide"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="mb-4"><label>Code Number</label><input type="text" name="code_number" class="input"></div>
-                <div class="mb-4"><label>Name</label><input type="text" name="name" class="input"></div>
-                <div class="mb-4"><label>Email</label><input type="email" name="email" class="input"></div>
-                <div class="mb-4"><label>Google Drive Video File ID</label><input type="text"
-                        name="drive_video_file_id" class="input"></div>
-                <div class="mb-4"><label>Google Drive Image File ID</label><input type="text"
-                        name="drive_image_file_id" class="input"></div>
-                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded">Submit</button>
-            </form>
+
+            </div>
         </div>
     </section>
 
 
-    <!-- Video Grid -->
-    <section class="container mx-auto py-10">
-        <h2 class="text-2xl font-semibold mb-6 text-center">Highlight Videos</h2>
-        <div id="video-grid" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            @foreach ($participants->take(4) as $v)
-                <iframe class="rounded-lg w-full aspect-video"
-                    src="https://drive.google.com/file/d/{{ $v->drive_video_file_id }}/preview" allowfullscreen></iframe>
-            @endforeach
+
+
+
+
+    <section class="cta-section section-padding section-bg">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+
+                <div class="col-lg-6 col-12 ms-auto">
+                    <h2 class="mb-0" style="font-size: 30px;">
+                        Register Below👇 to watch the attempts
+                    </h2>
+
+
+
+                </div>
+
+                <div class="col-lg-5 col-12">
+                    <a href="#" class="me-4">Already a member?</a>
+
+                    <a href="#section_4" class="custom-btn btn smoothscroll">Login here</a>
+                </div>
+
+            </div>
         </div>
     </section>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-    <script>
-        const canvas = document.getElementById('hero-canvas');
-        const renderer = new THREE.WebGLRenderer({
-            canvas,
-            alpha: true
-        });
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshNormalMaterial();
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-        camera.position.z = 3;
 
-        function animate() {
-            requestAnimationFrame(animate);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-            renderer.setSize(window.innerWidth, 400);
-            renderer.render(scene, camera);
-        }
-        animate();
-    </script>
+
+    <section class="volunteer-section section-padding" id="section_4">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-12">
+                    <h2 class="text-white mb-4">Register Here</h2>
+
+                    <form class="custom-form volunteer-form" action="#" method="post" role="form">
+                        <!-- Full Name -->
+                        <input type="text" name="full-name" id="full-name" class="form-control mb-3"
+                            placeholder="Full Name" required>
+
+                        <!-- Phone (Bangladesh valid number) -->
+                        <input type="tel" name="phone" id="phone" class="form-control mb-3"
+                            placeholder="Phone (e.g., 01XXXXXXXXX)" pattern="01[3-9][0-9]{8}"
+                            title="Enter a valid Bangladesh mobile number" required>
+
+                        <!-- Password (min 4 characters) -->
+                        <input type="password" name="password" id="password" class="form-control mb-3"
+                            placeholder="Password (min 4 characters)" minlength="4" required>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="form-control">Submit</button>
+                    </form>
+
+                </div>
+
+                <!-- <div class="col-lg-6 col-12">
+                            <img src="images/smiling-casual-woman-dressed-volunteer-t-shirt-with-badge.jpg"
+                                class="volunteer-image img-fluid" alt="">
+
+                            <div class="custom-block-body text-center">
+                                <h4 class="text-white mt-lg-3 mb-lg-3">About Volunteering</h4>
+
+                                <p class="text-white">Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm
+                                    tokito Professional charity theme based</p>
+                            </div>
+                        </div> -->
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section-padding" id="section_3">
+        <div class="container">
+            <div class="row">
+
+                <!-- Section Title -->
+                <div class="col-lg-12 col-12 text-center mb-4">
+                    <h2>OFFICIAL ATTEMPTS</h2>
+                </div>
+
+                <!-- Card 1 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                    <div class="custom-block-wrap">
+                        <!-- Google Drive Video Embed -->
+                        <div class="video-wrapper"
+                            style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                            <iframe src="https://drive.google.com/file/d/1zV7shmNpL54DzJR4yQr_lMCSZWwxXKWw/preview"
+                                style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                allow="autoplay" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="custom-block">
+
+
+                            <a href="" class="custom-btn btn">Name/Any Info</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                    <div class="custom-block-wrap">
+                        <div class="video-wrapper"
+                            style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                            <iframe src="https://drive.google.com/drive/folders/1bFBp1RypzFn-7CISRB8ZTsLEIAkoQKFX/preview"
+                                style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                allow="autoplay" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="custom-block">
+                            <div class="custom-block">
+
+
+                                <a href="" class="custom-btn btn">Name</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="custom-block-wrap">
+                        <div class="video-wrapper"
+                            style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                            <iframe src="https://drive.google.com/drive/folders/1EAHE-Thc_i80mwea8BTSy7BfouKVWp5m/preview"
+                                style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                allow="autoplay" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="custom-block">
+
+
+                            <a href="" class="custom-btn btn">Name</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Show More Button -->
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary">Show More</button>
+                </div>
+            </div>
+
+            <!-- Register to View All -->
+
+        </div>
+    </section>
+
 @endsection
+

@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [App\Http\Controllers\PublicController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::post('/register', [ParticipantController::class, 'store'])->name('register.store');
 Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
 Route::get('/participants/{participant}', [ParticipantController::class, 'show'])->name('participants.show');

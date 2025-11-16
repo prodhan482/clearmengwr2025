@@ -1,0 +1,314 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #03080e;
+        opacity: 1;
+        /* Firefox */
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        background-color: #ffff;
+        /*background: url('./bg3.jpg') no-repeat 49% 76%;*/
+        /*background-size: cover;*/
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: poppins;
+        position: relative;
+    }
+
+    .circles {
+        width: 400px;
+        height: 400px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+
+    .circle1 {
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(45deg, #ff0099, #7a0ed6);
+        border-radius: 50%;
+        position: absolute;
+        top: -100px;
+        right: -155px;
+    }
+
+    .circle2 {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(45deg, #ff237b, #f64838);
+        border-radius: 50%;
+        position: absolute;
+        bottom: -90px;
+        left: -70px;
+    }
+
+    .login_form {
+        display: flex;
+        flex-direction: column;
+        color: #03080e;
+        padding: 40px 26px;
+        width: 300px;
+        /*height: 300px;*/
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    }
+
+
+    .login_form h1 {
+        font-size: 25px;
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    .login_form p {
+        margin-top: 0;
+        margin-bottom: 26px;
+    }
+
+
+    .login_form input {
+        background: transparent;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        padding: 14px 16px;
+        margin-bottom: 30px;
+    }
+
+    .login_form input:focus {
+        outline: none;
+        border-color: #03080e;
+    }
+
+    .login_form button {
+        background: linear-gradient(45deg, #ff0d45, #ff01eb);
+        color: #03080e;
+        border: none;
+        border-radius: 6px;
+        padding: 14px 16px;
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /*.login_form button:focus {
+    outline: none;
+    box-shadow: 0 0 15px #ff0d45;
+}*/
+
+
+
+    .home-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 8px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .home-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .home-button svg {
+        display: block;
+        stroke: #333;
+    }
+</style>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta -->
+    <title>Clear Men Guinness World Records | Official Record Attempts</title>
+    <meta name="description"
+        content="Join Clear Men’s official Guinness World Record attempts. Register now, watch highlights, and be part of history.">
+    <meta name="keywords"
+        content="Clear Men, Guinness World Records, record attempts, Bangladesh, registration, official event, world record">
+    <meta name="author" content="Clear Men Bangladesh">
+    <link rel="canonical" href="https://www.clearmenrecords.com/">
+
+    <!-- Open Graph (Facebook, WhatsApp, etc.) -->
+    <meta property="og:title" content="Clear Men Guinness World Records">
+    <meta property="og:description"
+        content="Be part of Clear Men’s Guinness World Record attempts — register now to witness and join history in the making.">
+    <meta property="og:image" content="https://www.clearmenrecords.com/images/clearmen-banner.jpg">
+    <meta property="og:url" content="https://www.clearmenrecords.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Clear Men Guinness World Records">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Clear Men Guinness World Records">
+    <meta name="twitter:description"
+        content="Join the official Clear Men Guinness World Record attempts. Register to take part!">
+    <meta name="twitter:image" content="https://www.clearmenrecords.com/images/clearmen-banner.jpg">
+    <meta name="twitter:site" content="@clearmenbd">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#0d6efd">
+    <meta name="msapplication-TileColor" content="#0d6efd">
+
+    <!-- CSS FILES -->
+    <!-- CSS FILES -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/templatemo-kind-heart-charity.css" rel="stylesheet">
+
+</head>
+
+
+<body id="section_1">
+
+
+
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" class="logo img-fluid" alt="ClearmenGWR">
+                <span>
+                    Clear Men Guiness World Record
+                    <small style="justify-content: center;">OFFICIAL ATTEMPT</small>
+                </span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#top">Home</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_4">Register</a>
+                    </li>
+
+
+
+
+
+                    <li class="nav-item ms-3">
+                        <a class="nav-link custom-btn custom-border-btn btn" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="home-button">
+            <a href="home.html" title="Go Home">
+                <!-- Using SVG home icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#000"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V12H9v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+
+        <div class="circles">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+        </div>
+
+        <form action="#" class="login_form">
+            <h1>Welcome back!</h1>
+            <p>Login to your account.</p>
+            <input type="email" placeholder="Email address">
+            <input type="password" placeholder="Password">
+           <a href="participant.html">View Demo</a> <button type="submit">Login</button>
+        </form>
+
+    </section>
+
+    <footer class="site-footer" style="padding: 0; text-align: center; background-color: #111;">
+        <div class="container" style="padding: 0;">
+            <div class="row">
+                <div class="col-lg-12 col-12 mb-12" style="padding: 0;">
+                    <img src="images/logo2.png" alt="Footer Logo" draggable="false" oncontextmenu="return false;" style="
+                        display: block;
+                        margin: 0 auto;
+                        width: 80%;
+                        max-width: 80%;
+                        height: 80%;
+                        object-fit: contain;
+                        user-select: none;
+                        pointer-events: none;
+                        padding-top: 5%;
+                     ">
+                </div>
+            </div>
+        </div>
+
+        <div class="site-footer-bottom"
+            style="background-color: #0c0a0a; color: #fff; padding: 10px 0; text-align: center;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-7 col-12" style="margin: 0 auto;">
+                        <p class="copyright-text mb-0" style="margin: 0; color: #ccc;">
+                            Copyright © 2025
+                            <a href="/" style="color: #fff; text-decoration: none;">Clear Men Guiness World Record</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT FILES -->
+    <!-- JS FILES -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/click-scroll.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/custom.js"></script>
+
+
+</body>
+
+</html>

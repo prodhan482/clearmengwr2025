@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ParticipantController extends Controller
 {
@@ -11,21 +12,40 @@ class ParticipantController extends Controller
      * Display a listing of the resource.
      */
     // Paginated list (for after-registration page)
-    public function index(Request $r)
+    public function index(Request $request)
     {
-        $perPage = 50;  // tuneable
-        $query = Participant::query()->orderBy('serial_number');
-        $participants = $query->paginate($perPage);
-        return view('participants.index', compact('participants'));
+        if ($request->ajax()) {
+            $query = Participant::select(['id', 'serial_number', 'code_number', 'name', 'email', 'phone', 'drive_image_file_id', 'drive_video_file_id']);
+            return DataTables::of($query)
+                ->addColumn('action', function ($row) {
+                    return '<button class="action-btn" data-img="' . asset('storage/' . $row->drive_image_file_id) . '" data-vid="' . asset('storage/' . $row->drive_video_file_id) . '">View</button>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('participants.index'); // Blade will use AJAX DataTables
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function adminIndex()
+    // For admin view
+    public function adminIndex(Request $request)
     {
-        $participants = Participant::orderBy('serial_number')->paginate(20);
-        return view('admin.participants.index', compact('participants'));
+        if ($request->ajax()) {
+            $query = Participant::select(['id', 'serial_number', 'code_number', 'name', 'email', 'phone', 'drive_image_file_id', 'drive_video_file_id']);
+            return DataTables::of($query)
+                ->addColumn('action', function ($row) {
+                    $edit = '<a href="' . route('admin.participants.edit', $row->id) . '" class="edit-btn">Edit</a>';
+                    $delete = '<form method="POST" action="' . route('admin.participants.destroy', $row->id) . '" style="display:inline;">
+                            ' . csrf_field() . method_field('DELETE') . '
+                            <button type="submit" class="delete-btn">Delete</button>
+                          </form>';
+                    return $edit . ' ' . $delete . ' <button class="action-btn" data-img="' . asset('storage/' . $row->drive_image_file_id) . '" data-vid="' . asset('storage/' . $row->drive_video_file_id) . '">View</button>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('admin.participants.index');
     }
 
     public function create()

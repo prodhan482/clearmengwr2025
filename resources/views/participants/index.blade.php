@@ -1,64 +1,128 @@
-@extends('layouts.app')
+@extends('layouts.web.layouts')
+
 @section('content')
-    <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-semibold mb-6 text-center">Registered Participants</h1>
-        <table class="min-w-full bg-white border rounded-xl">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="p-2">Serial</th>
-                    <th class="p-2">Name</th>
-                    <th class="p-2">Code</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($participants as $p)
-                    <tr class="border-b">
-                        <td class="p-2">{{ $p->serial_number }}</td>
-                        <td class="p-2">{{ $p->name }}</td>
-                        <td class="p-2">{{ $p->code_number }}</td>
-                        <td class="p-2 text-right"><button @click="openModal({{ $p->id }})"
-                                class="bg-blue-600 text-white px-3 py-1 rounded">View</button></td>
+    <div class="min-h-screen bg-gradient-to-br from-white via-blue-50 to-white p-8">
+        <div class="max-w-7xl mx-auto rounded-3xl shadow-2xl p-6 bg-white/60 backdrop-blur-2xl border border-white/30">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">👤 Participants</h1>
+
+            <table id="participantTable" class="display w-full text-gray-800 text-sm rounded-xl">
+                <thead class="bg-white/40 backdrop-blur-md">
+                    <tr>
+                        <th>ID</th>
+                        <th>Serial</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="mt-4">{{ $participants->links() }}</div>
-    </div>
-
-
-    <div x-data="participantModal()" x-init="init()">
-        <div x-show="open" class="fixed inset-0 bg-black/50 flex items-center justify-center">
-            <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 p-4">
-                <h3 class="text-xl font-semibold mb-2" x-text="participant.name"></h3>
-                <iframe class="w-full aspect-video rounded" :src="drivePreviewUrl(participant.drive_video_file_id)"
-                    frameborder="0" allowfullscreen></iframe>
-                <div class="text-right mt-3"><button class="bg-gray-600 text-white px-3 py-1 rounded"
-                        @click="close()">Close</button></div>
-            </div>
+                </thead>
+            </table>
         </div>
     </div>
 
-
-    <script>
-        function participantModal() {
-            return {
-                open: false,
-                participant: {},
-                init() {},
-                openModal(id) {
-                    fetch(`/participants/${id}`).then(r => r.json()).then(j => {
-                        this.participant = j;
-                        this.open = true
-                    });
-                },
-                close() {
-                    this.open = false;
-                },
-                drivePreviewUrl(id) {
-                    return `https://drive.google.com/file/d/${id}/preview`;
-                }
-            }
-        }
-    </script>
+    <!-- Hover Preview -->
+    <div id="hoverPreview"
+        class="hidden absolute bg-white/80 backdrop-blur-lg rounded-xl p-3 shadow-2xl border border-white/40 w-72 transition-all duration-300 transform scale-0">
+        <img id="previewImage" src="" alt="Preview Image" class="w-full rounded-md mb-2 shadow-md">
+        <video id="previewVideo" class="w-full rounded-md shadow-md" autoplay muted loop></video>
+    </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        /* Light Glassmorphism */
+        #participantTable tbody tr {
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        #participantTable tbody tr:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .action-btn {
+            background: linear-gradient(145deg, #e0f7ff, #b3e5fc);
+            color: #0a192f;
+            padding: 6px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.08);
+            background: linear-gradient(145deg, #bbdefb, #e3f2fd);
+            box-shadow: 0 4px 12px rgba(0, 136, 255, 0.2);
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const table = $('#participantTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('participants.index') }}',
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'serial_number',
+                        name: 'serial_number'
+                    },
+                    {
+                        data: 'code_number',
+                        name: 'code_number'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                pageLength: 25,
+                responsive: true,
+                order: [
+                    [1, 'asc']
+                ]
+            });
+
+            const hoverBox = $('#hoverPreview');
+            $(document).on('mouseenter', '.action-btn', function(e) {
+                const img = $(this).data('img');
+                const vid = $(this).data('vid');
+                $('#previewImage').attr('src', img);
+                $('#previewVideo').attr('src', vid);
+                hoverBox.css({
+                    top: e.pageY + 15 + 'px',
+                    left: e.pageX + 15 + 'px'
+                }).removeClass('hidden').addClass('scale-100');
+            }).on('mouseleave', '.action-btn', function() {
+                hoverBox.addClass('hidden').removeClass('scale-100');
+            });
+        });
+    </script>
+@endpush

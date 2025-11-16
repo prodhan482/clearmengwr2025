@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,4 +16,4 @@
     @include('components.footer')
 </body>
 
-</html>
+</html> --}}
