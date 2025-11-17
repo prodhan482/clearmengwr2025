@@ -1,3 +1,6 @@
+
+
+
 @extends('layouts.web.layouts')
 
 @section('title', 'Home | Clear Men Guinness World Records')
@@ -64,95 +67,75 @@
 
 
 
-    @guest
-        <section class="cta-section section-padding section-bg">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
 
-                    <div class="col-lg-6 col-12 ms-auto">
-                        <h2 class="mb-0" style="font-size: 30px;">
-                            Register Below👇 to watch the attempts
-                        </h2>
+    <section class="cta-section section-padding section-bg">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+
+                <div class="col-lg-6 col-12 ms-auto">
+                    <h2 class="mb-0" style="font-size: 30px;">
+                        Register Below👇 to watch the attempts
+                    </h2>
 
 
-
-                    </div>
-
-                    <div class="col-lg-5 col-12">
-                        <a href="/login" class="me-4">Already a member?</a>
-
-                        <a href="/login" class="custom-btn btn smoothscroll">Login here</a>
-                    </div>
 
                 </div>
+
+                <div class="col-lg-5 col-12">
+                    <a href="#" class="me-4">Already a member?</a>
+
+                    <a href="#section_4" class="custom-btn btn smoothscroll">Login here</a>
+                </div>
+
             </div>
-        </section>
-    @endguest
+        </div>
+    </section>
 
 
-    @auth
-        <section class="cta-section section-padding section-bg">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
 
-                    <div class="col-lg-6 col-12 ms-auto">
-                        <h2 class="mb-0" style="font-size: 30px;">
-                            Hii , {{ Auth::user()->name }}!
-                        </h2>
-                    </div>
 
-                    <div class="col-lg-5 col-12">
-                        <h2 style="font-size: 30px">Click here to view all attempts.</h2>
+    <section class="volunteer-section section-padding" id="section_4">
+        <div class="container">
+            <div class="row">
 
-                        <a href="{{'participants'}}" class="custom-btn btn smoothscroll">
-                            G<i class="fas fa-thin fa-futbol" style="animation: bounce 1s infinite;"></i>
-                        </a>
-                    </div>
+                <div class="col-lg-8 col-12">
+                    <h2 class="text-white mb-4">Register Here</h2>
+
+                    <form class="custom-form volunteer-form" action="#" method="post" role="form">
+                        <!-- Full Name -->
+                        <input type="text" name="full-name" id="full-name" class="form-control mb-3"
+                            placeholder="Full Name" required>
+
+                        <!-- Phone (Bangladesh valid number) -->
+                        <input type="tel" name="phone" id="phone" class="form-control mb-3"
+                            placeholder="Phone (e.g., 01XXXXXXXXX)" pattern="01[3-9][0-9]{8}"
+                            title="Enter a valid Bangladesh mobile number" required>
+
+                        <!-- Password (min 4 characters) -->
+                        <input type="password" name="password" id="password" class="form-control mb-3"
+                            placeholder="Password (min 4 characters)" minlength="4" required>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="form-control">Submit</button>
+                    </form>
 
                 </div>
+
+                <!-- <div class="col-lg-6 col-12">
+                            <img src="images/smiling-casual-woman-dressed-volunteer-t-shirt-with-badge.jpg"
+                                class="volunteer-image img-fluid" alt="">
+
+                            <div class="custom-block-body text-center">
+                                <h4 class="text-white mt-lg-3 mb-lg-3">About Volunteering</h4>
+
+                                <p class="text-white">Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm
+                                    tokito Professional charity theme based</p>
+                            </div>
+                        </div> -->
+
             </div>
-        </section>
-
-    @endauth
-
-
-
-
-
-    @guest
-        <section class="volunteer-section section-padding" id="section_4">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-8 col-12">
-                        <h2 class="text-white mb-4">Register Here</h2>
-
-                        <form class="custom-form volunteer-form" action="{{ route('register') }}" method="POST" role="form">
-                            @csrf
-
-                            <!-- Inputs -->
-                            <input type="text" name="name" id="full-name" class="form-control mb-3" placeholder="Full Name"
-                                value="{{ old('name') }}" required>
-
-                            <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Email address"
-                                value="{{ old('email') }}" required>
-
-                            <input type="password" name="password" id="password" class="form-control mb-3"
-                                placeholder="Password (min 4 characters)" minlength="4" required>
-
-                            <input type="password" name="password_confirmation" id="password_confirmation"
-                                class="form-control mb-3" placeholder="Confirm Password" minlength="4" required>
-
-                            <button type="submit" class="form-control">Submit</button>
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    @endguest
-
+        </div>
+    </section>
 
 
 
@@ -230,49 +213,14 @@
             <!-- Show More Button -->
             <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <button class="btn btn-primary custom-btn">Show More</button>
+                    <button class="btn btn-primary">Show More</button>
                 </div>
             </div>
-
 
             <!-- Register to View All -->
 
         </div>
     </section>
 
-
-    {{-- SweetAlert2 CDN --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-    <script>
-        // Validation errors
-        @if ($errors->any())
-            let errorMessages = "";
-            @foreach ($errors->all() as $error)
-                errorMessages += "{{ $error }}\n";
-            @endforeach
-
-            Swal.fire({
-                icon: 'error',
-                title: 'Fill up all required fields correctly',
-                text: errorMessages,
-                confirmButtonColor: '#0cf8c9'
-            });
-        @endif
-
-        // Success message after registration
-        @if (session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: '{{ session('success') }}',
-                timer: 3000,
-                showConfirmButton: false,
-                position: 'top-end',
-                toast: true
-            });
-        @endif
-    </script>
-
 @endsection
+

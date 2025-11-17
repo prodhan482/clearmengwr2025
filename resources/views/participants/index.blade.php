@@ -1,128 +1,108 @@
 @extends('layouts.web.layouts')
 
-@section('content')
-    <div class="min-h-screen bg-gradient-to-br from-white via-blue-50 to-white p-8">
-        <div class="max-w-7xl mx-auto rounded-3xl shadow-2xl p-6 bg-white/60 backdrop-blur-2xl border border-white/30">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">👤 Participants</h1>
+@section('title', 'Home | Clear Men Guinness World Records')
 
-            <table id="participantTable" class="display w-full text-gray-800 text-sm rounded-xl">
-                <thead class="bg-white/40 backdrop-blur-md">
-                    <tr>
-                        <th>ID</th>
-                        <th>Serial</th>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-            </table>
+@section('content')
+
+    <div class="p-5">
+        <table id="datatable-json" class="table table-striped table-bordered table-hover w-100">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>+1 123-456-7890</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm view-attempts" data-name="John Doe"
+                            data-images="assets/images/slide/slide1.jpg,assets/images/slide/slide2.png"
+                            data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            data-drive="https://drive.google.com/file/d/yourfileid/view">View Attempts</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td>+1 987-654-3210</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm view-attempts" data-name="Jane Smith"
+                            data-images="assets/images/slide/slide3.jpg" data-video="https://www.youtube.com/embed/VIDEO_ID"
+                            data-drive="https://drive.google.com/file/d/anotherfileid/view">View Attempts</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="attemptsModal" tabindex="-1" aria-labelledby="attemptsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="attemptsModalLabel">Attempts</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="attemptsImages" class="mb-3 d-flex flex-wrap gap-3"></div>
+                    <div class="mb-3">
+                        <iframe id="attemptsVideo" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div>
+                        <a id="attemptsDrive" href="#" target="_blank" class="btn btn-success">Open Drive Link</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Hover Preview -->
-    <div id="hoverPreview"
-        class="hidden absolute bg-white/80 backdrop-blur-lg rounded-xl p-3 shadow-2xl border border-white/40 w-72 transition-all duration-300 transform scale-0">
-        <img id="previewImage" src="" alt="Preview Image" class="w-full rounded-md mb-2 shadow-md">
-        <video id="previewVideo" class="w-full rounded-md shadow-md" autoplay muted loop></video>
-    </div>
-@endsection
-
-@push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <style>
-        /* Light Glassmorphism */
-        #participantTable tbody tr {
-            background: rgba(255, 255, 255, 0.8);
-            transition: all 0.3s;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
-        }
-
-        #participantTable tbody tr:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .action-btn {
-            background: linear-gradient(145deg, #e0f7ff, #b3e5fc);
-            color: #0a192f;
-            padding: 6px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 500;
-            border: none;
-            transition: all 0.3s;
-        }
-
-        .action-btn:hover {
-            transform: scale(1.08);
-            background: linear-gradient(145deg, #bbdefb, #e3f2fd);
-            box-shadow: 0 4px 12px rgba(0, 136, 255, 0.2);
-        }
-    </style>
-@endpush
-
-@push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- Scripts -->
     <script>
-        $(document).ready(function() {
-            const table = $('#participantTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('participants.index') }}',
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'serial_number',
-                        name: 'serial_number'
-                    },
-                    {
-                        data: 'code_number',
-                        name: 'code_number'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'action',
-                        orderable: false,
-                        searchable: false
-                    }
-                ],
-                pageLength: 25,
-                responsive: true,
-                order: [
-                    [1, 'asc']
-                ]
+        $(document).ready(function () {
+            // Initialize DataTable
+            $('#datatable-json').DataTable({
+                responsive: true
             });
 
-            const hoverBox = $('#hoverPreview');
-            $(document).on('mouseenter', '.action-btn', function(e) {
-                const img = $(this).data('img');
-                const vid = $(this).data('vid');
-                $('#previewImage').attr('src', img);
-                $('#previewVideo').attr('src', vid);
-                hoverBox.css({
-                    top: e.pageY + 15 + 'px',
-                    left: e.pageX + 15 + 'px'
-                }).removeClass('hidden').addClass('scale-100');
-            }).on('mouseleave', '.action-btn', function() {
-                hoverBox.addClass('hidden').removeClass('scale-100');
+            // Handle View Attempts button click
+            $('.view-attempts').click(function () {
+                var name = $(this).data('name');
+                var images = $(this).data('images').split(',');
+                var video = $(this).data('video');
+                var drive = $(this).data('drive');
+
+                $('#attemptsModalLabel').text(name + ' - Attempts');
+
+                // Images
+                var html = '';
+                images.forEach(function (src) {
+                    html += `<img src="${src}" class="img-fluid rounded" style="max-height:200px;">`;
+                });
+                $('#attemptsImages').html(html);
+
+                // Video
+                $('#attemptsVideo').attr('src', video);
+
+                // Drive Link
+                $('#attemptsDrive').attr('href', drive);
+
+                // Show modal
+                var modal = new bootstrap.Modal(document.getElementById('attemptsModal'));
+                modal.show();
+            });
+
+            // Clear modal content on close
+            $('#attemptsModal').on('hidden.bs.modal', function () {
+                $('#attemptsImages').html('');
+                $('#attemptsVideo').attr('src', '');
+                $('#attemptsDrive').attr('href', '#');
             });
         });
     </script>
-@endpush
+
+@endsection

@@ -39,6 +39,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/apple-touch-icon.png') }}">
     <link rel="manifest" href="{{ asset('assets/site.webmanifest') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    
+
+
     {{-- Theme Colors --}}
     <meta name="theme-color" content="#0d6efd">
     <meta name="msapplication-TileColor" content="#0d6efd">
@@ -72,6 +78,21 @@
     <script src="{{ asset('assets/js/click-scroll.js') }}"></script>
     <script src="{{ asset('assets/js/counter.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+
+    <!-- jQuery (for DataTables) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables CSS & JS -->
+<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
     {{-- Extra Scripts --}}
     @yield('custom_js')

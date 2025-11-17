@@ -19,4 +19,9 @@ class HomeController extends Controller
     {
         return view('web.login');
     }
+
+    public function participants()
+    {
+        return view('web.participants');
+    }
 }

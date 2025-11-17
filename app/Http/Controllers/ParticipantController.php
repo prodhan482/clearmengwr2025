@@ -24,7 +24,7 @@ class ParticipantController extends Controller
                 ->make(true);
         }
 
-        return view('participants.index'); // Blade will use AJAX DataTables
+        return view('participants.index');  // Blade will use AJAX DataTables
     }
 
     // For admin view

@@ -96,61 +96,60 @@
 
     <main>
 
-        <section class="hero-section hero-section-full-height">
-            <div class="container-fluid">
-                <div class="row">
+     <!-- Fully Responsive Hero Section Carousel -->
+<section class="hero-section hero-section-full-height">
+<div class="container-fluid p-0">
+<div class="row">
+<div class="col-12 p-0">
+<div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
 
-                    <div class="col-lg-12 col-12 p-0">
-                        <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="images/slide/slide1.jpg" class="carousel-image img-fluid" alt="...">
 
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>be a Kind Heart</h1>
+<div class="carousel-inner">
+<div class="carousel-item active">
+<img src="images/slide/slide1.jpg" class="carousel-image img-fluid w-100" alt="Slide 1">
+<div class="carousel-caption d-flex flex-column justify-content-end">
+<h1>Be a Kind Heart</h1>
+<p>Professional charity theme based on Bootstrap 5.2.2</p>
+</div>
+</div>
 
-                                        <p>Professional charity theme based on Bootstrap 5.2.2</p>
-                                    </div>
-                                </div>
 
-                                <div class="carousel-item">
-                                    <img src="images/slide/slide2.png" class="carousel-image img-fluid" alt="...">
+<div class="carousel-item">
+<img src="images/slide/slide2.png" class="carousel-image img-fluid w-100" alt="Slide 2">
+<div class="carousel-caption d-flex flex-column justify-content-end">
+<h1>Non-profit</h1>
+<p>You can support us to grow more</p>
+</div>
+</div>
 
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Non-profit</h1>
 
-                                        <p>You can support us to grow more</p>
-                                    </div>
-                                </div>
+<div class="carousel-item">
+<img src="images/slide/slide3.jpg" class="carousel-image img-fluid w-100" alt="Slide 3">
+<div class="carousel-caption d-flex flex-column justify-content-end">
+<h1>Humanity</h1>
+<p>Please tell your friends about our website</p>
+</div>
+</div>
+</div>
 
-                                <div class="carousel-item">
-                                    <img src="images/slide/slide3.jpg" class="carousel-image img-fluid" alt="...">
 
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Humanity</h1>
+<button class="carousel-control-prev" type="button" data-bs-target="#hero-slide" data-bs-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Previous</span>
+</button>
 
-                                        <p>Please tell your friends about our website</p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
+<button class="carousel-control-next" type="button" data-bs-target="#hero-slide" data-bs-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Next</span>
+</button>
 
-                            <button class="carousel-control-next" type="button" data-bs-target="#hero-slide"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </section>
+</div>
+</div>
+</div>
+</div>
+</section>
 
 
 
@@ -207,21 +206,7 @@
                             <!-- Submit Button -->
                             <button type="submit" class="form-control">Submit</button>
                         </form>
-
                     </div>
-
-                    <!-- <div class="col-lg-6 col-12">
-                        <img src="images/smiling-casual-woman-dressed-volunteer-t-shirt-with-badge.jpg"
-                            class="volunteer-image img-fluid" alt="">
-
-                        <div class="custom-block-body text-center">
-                            <h4 class="text-white mt-lg-3 mb-lg-3">About Volunteering</h4>
-
-                            <p class="text-white">Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm
-                                tokito Professional charity theme based</p>
-                        </div>
-                    </div> -->
-
                 </div>
             </div>
         </section>

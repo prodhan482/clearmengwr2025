@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/login', [HomeController::class, 'login'])->name('login');
-Route::post('/register', [ParticipantController::class, 'store'])->name('register.store');
-Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
-Route::get('/participants/{participant}', [ParticipantController::class, 'show'])->name('participants.show');
+
+
+
+
 
 // Admin group (middleware: auth + admin)
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -25,7 +26,23 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::delete('/participants/{id}', [ParticipantController::class, 'destroy'])->name('admin.participants.destroy');
 });
 
-// Route::middleware(['auth','admin'])->prefix('admin')->group(function(){
-// Route::get('/', function(){ return view('admin.dashboard'); })->name('admin.dashboard');
-// Route::resource('participants', ParticipantController::class)->except(['show','store']);
-// });
+
+
+
+Route::get('register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+
+Route::get('login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('participants', [AuthController::class, 'participantsList'])->name('participants.list');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+// Admin dashboard route
+Route::middleware(['auth'])->group(function () {
+    Route::get('admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
