@@ -5,7 +5,6 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
 
@@ -18,7 +17,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     })->name('admin.dashboard');
 
     Route::resource('participants', ParticipantController::class)->except(['index', 'show', 'store']);
-
+    
     Route::get('/participants/create', [ParticipantController::class, 'create'])->name('admin.participants.create');
     Route::post('/participants', [ParticipantController::class, 'store'])->name('admin.participants.store');
     Route::get('/participants/{id}/edit', [ParticipantController::class, 'edit'])->name('admin.participants.edit');
@@ -29,6 +28,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 
 
+Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
@@ -40,7 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-// Admin dashboard route
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/dashboard', function () {
         return view('admin.dashboard');

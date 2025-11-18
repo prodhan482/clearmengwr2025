@@ -124,7 +124,7 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-8 col-12">
+                    <div class="col-lg-10 col-12">
                         <h2 class="text-white mb-4">Register Here</h2>
 
                         <form class="custom-form volunteer-form" action="{{ route('register') }}" method="POST" role="form">
@@ -224,13 +224,78 @@
                         </div>
                     </div>
                 </div>
+            </div><br><br><br><br>
+
+
+            <div class="row">
+
+                <!-- Card 1 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                    <div class="custom-block-wrap">
+                        <!-- Google Drive Video Embed -->
+                        <div class="video-wrapper"
+                            style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                            <iframe src="https://drive.google.com/file/d/1zV7shmNpL54DzJR4yQr_lMCSZWwxXKWw/preview"
+                                style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                allow="autoplay" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="custom-block">
+
+
+                            <a href="" class="custom-btn btn">Name/Any Info</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                    <div class="custom-block-wrap">
+                        <div class="video-wrapper"
+                            style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                            <iframe src="https://drive.google.com/drive/folders/1bFBp1RypzFn-7CISRB8ZTsLEIAkoQKFX/preview"
+                                style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                allow="autoplay" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="custom-block">
+                            <div class="custom-block">
+
+
+                                <a href="" class="custom-btn btn">Name</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="custom-block-wrap">
+                        <div class="video-wrapper"
+                            style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                            <iframe src="https://drive.google.com/drive/folders/1EAHE-Thc_i80mwea8BTSy7BfouKVWp5m/preview"
+                                style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                allow="autoplay" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="custom-block">
+
+
+                            <a href="" class="custom-btn btn">Name</a>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
 
             <!-- Show More Button -->
             <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <button class="btn btn-primary custom-btn">Show More</button>
+                    <a href="/participants"><button class="btn btn-primary custom-btn">Show More</button></a>
                 </div>
             </div>
 

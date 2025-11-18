@@ -627,14 +627,14 @@
             var table = $('#datatable-json').DataTable({
                 responsive: true,
                 paging: true,          // Enable pagination
-                pageLength: 10,         // Default entries per page
+                pageLength: 25,         // Default entries per page
                 lengthMenu: [5, 10, 25, 50], // Entries dropdown
                 searching: true,       // Enable search
                 ordering: true,        // Enable column ordering
                 info: true,            // Show "Showing x to y of z entries"
                 language: {
                     search: "_INPUT_",
-                    searchPlaceholder: "Search records..."
+                    searchPlaceholder: "Search attempts..."
                 }
             });
 

@@ -14,6 +14,10 @@
                         pointer-events: none;
                         padding-top: 5%;
                      ">
+                <!-- New Text Under Logo -->
+                <p style="color: #ccc; font-size: 18px; margin-top: 10px;">
+                    <b>MOST PEOPLE IN AN ONLINE VIDEO CHAIN PASSING A FOOTBALL (SOCCER BALL)</b>
+                </p>
             </div>
         </div>
     </div>
@@ -25,45 +29,10 @@
                 <div class="col-lg-6 col-md-7 col-12" style="margin: 0 auto;">
                     <p class="copyright-text mb-0" style="margin: 0; color: #ccc;">
                         Copyright © 2025
-                        <a href="/" style="color: #fff; text-decoration: none;">Clear Men Guiness World
-                            Record</a>
-
+                        <a href="/" style="color: #fff; text-decoration: none;">Clear Men Guinness World Record</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-
-
-
-
-
-
-
-<style>
-    /* Responsive Footer Styling */
-    @media (max-width: 768px) {
-        .site-footer img {
-            width: 90%;
-            max-width: 260px;
-            padding-top: 8%;
-        }
-
-        .copyright-text {
-            font-size: 13px !important;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .site-footer img {
-            width: 95%;
-            max-width: 220px;
-            padding-top: 10%;
-        }
-
-        .copyright-text {
-            font-size: 12px !important;
-        }
-    }
-</style>

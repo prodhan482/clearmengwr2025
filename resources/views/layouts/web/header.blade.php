@@ -6,6 +6,10 @@
                 Clear Men Guinness World Record
                 <small style="justify-content: center;">OFFICIAL ATTEMPT</small>
             </span>
+
+            <p style="color: #030453; font-size: 4px; margin: 5px 0 0 0;">
+                <b>PEOPLE IN AN ONLINE VIDEO CHAIN<br> PASSING A FOOTBALL (SOCCER BALL)</b> 
+            </p>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -19,11 +23,21 @@
                 @guest
                     <!-- Show Home/Register/Login if not logged in -->
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="{{ '/' }}">Home</a>
+                        @if(Request::is('/'))
+                            <a class="nav-link click-scroll" href="{{ '/' }}">Home</a>
+                        @else
+                            <a class="nav-link" href="{{'/'}}">Home</a>
+                        @endif
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_4">Register</a>
+
+                        @if(Request::is('/'))
+                            <a class="nav-link click-scroll" href="#section_4">Register</a>
+                        @else
+                            <a class="nav-link" href="{{'/#section_4'}}">Register</a>
+                        @endif
+
                     </li>
 
                     <li class="nav-item ms-3">
@@ -39,7 +53,8 @@
                     <li class="nav-item ms-3">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="nav-link custom-btn custom-border-btn btn-danger" type="submit" style="border:none;">Logout</button>
+                            <button class="nav-link custom-btn custom-border-btn btn-danger" type="submit"
+                                style="border:none;">Logout</button>
                         </form>
                     </li>
                 @endauth
