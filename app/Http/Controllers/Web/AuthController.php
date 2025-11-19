@@ -48,7 +48,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             // Role-based redirection
-            if (Auth::user()->role === 'admin') {
+            if (Auth::user()->role === 'SUPER_ADMIN') {
                 return redirect()->route('admin.dashboard');  // admin page
             } else {
                 return redirect()->route('participants.list');  // participant list

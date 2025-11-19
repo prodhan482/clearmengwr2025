@@ -1,0 +1,52 @@
+# php artisan migrate
+# php artisan db:seed --class=PermissionTableSeeder
+# php artisan db:seed --class=CreateAdminUserSeeder
+
+Then a Clearmen GWR Admin Will be created . 
+ID : dulal.prodhan@highvoltage.ltd
+phone : 01641366908
+pass : hvl2025
+
+
+
+
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    <meta name="keywords" content="@yield('keywords')">
+    <meta name="description" content="@yield('description')">
+    <link rel="canonical" href="@yield('canonical')">
+</head>
+<body>
+    @yield('content')
+</body>
+</html>
+
+
+
+
+
+@extends('layouts.app')
+
+@section('title', 'Page Title')
+@section('keywords', 'keyword1, keyword2, keyword3')
+@section('description', 'This is the description for the page.')
+@section('canonical', 'https://example.com/page-url')
+
+@section('content')
+    <!-- Your page-specific content goes here -->
+@endsection

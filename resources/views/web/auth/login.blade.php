@@ -88,7 +88,7 @@
 
     .login_form input {
         background: transparent;
-        color: #fff;
+        color: #000000;
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 6px;
         padding: 14px 16px;
