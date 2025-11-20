@@ -2,7 +2,7 @@
 # php artisan db:seed --class=PermissionTableSeeder
 # php artisan db:seed --class=CreateAdminUserSeeder
 
-Then a Clearmen GWR Admin Will be created . 
+Then a HIGH VOLTAGE LTD. Admin Will be created . 
 ID : dulal.prodhan@highvoltage.ltd
 phone : 01641366908
 pass : hvl2025

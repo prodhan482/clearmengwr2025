@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class CreateAdminUserSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class CreateAdminUserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-        'name' => 'HIGH VOLTAGE LTD.',
+            'name' => 'HIGH VOLTAGE LTD.',
             'email' => 'dulal.prodhan@highvoltage.ltd',
             'password' => Hash::make('hvl2025'),
             'phone' => '01641366908',
@@ -26,7 +26,7 @@ class CreateAdminUserSeeder extends Seeder
 
         $role = Role::findOrCreate('SUPER_ADMIN');
 
-        $permissions = Permission::pluck('id','id')->all();
+        $permissions = Permission::pluck('id', 'id')->all();
 
         $role->syncPermissions($permissions);
 
