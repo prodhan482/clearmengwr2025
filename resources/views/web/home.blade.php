@@ -112,7 +112,7 @@
                     <div class="col-lg-10 col-12">
                         <h2 class="text-white mb-4">Register Here</h2>
 
-                        <form class="custom-form volunteer-form" action="{{ route('register') }}" method="POST" role="form">
+                        <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST" role="form">
                             @csrf
 
                             <!-- Inputs -->

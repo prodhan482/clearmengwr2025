@@ -23,6 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('web2.home');
+        return view('web.home');
+    }
+
+    public function participantsList()
+    {
+        return view('web.participants.dashboard');
+    }
+
+    public function dashboard()
+    {
+        return view('common_views.dashboard');
     }
 }

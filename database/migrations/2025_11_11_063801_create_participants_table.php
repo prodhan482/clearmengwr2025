@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('serial_number')->unique();
             $table->string('code_number')->index();
             $table->string('name');
             $table->string('email')->nullable()->index();

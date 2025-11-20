@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ParticipantsImport;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ParticipantController extends Controller
 {
@@ -21,8 +23,19 @@ class ParticipantController extends Controller
 
     public function store(Request $request)
     {
-        Participant::create($request->all());
-        return redirect()->route('admin.participants.index')->with('success', 'Participant added!');
+        $validated = $request->validate([
+            'code_number' => 'required|string|unique:participants,code_number',
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email',
+            'phone' => 'nullable|string',
+            'notes' => 'nullable|string',
+            'drive_video_file_id' => 'nullable|string',
+            'drive_image_file_id' => 'nullable|string',
+        ]);
+
+        Participant::create($validated);
+
+        return redirect()->route('participants.index')->with('success', 'Participant added!');
     }
 
     public function edit(Participant $participant)
@@ -33,13 +46,13 @@ class ParticipantController extends Controller
     public function update(Request $request, Participant $participant)
     {
         $participant->update($request->all());
-        return redirect()->route('admin.participants.index')->with('success', 'Participant updated!');
+        return redirect()->route('participants.index')->with('success', 'Participant updated!');
     }
 
     public function destroy(Participant $participant)
     {
         $participant->delete();
-        return redirect()->route('admin.participants.index')->with('success', 'Participant deleted!');
+        return redirect()->route('participants.index')->with('success', 'Participant deleted!');
     }
 
     public function importForm()
@@ -47,14 +60,24 @@ class ParticipantController extends Controller
         return view('admin.participants.import');
     }
 
+    // public function import(Request $request)
+    // {
+    //     $request->validate([
+    //         'file' => 'required|mimes:xlsx,csv'
+    //     ]);
+
+    //     Excel::import(new ParticipantsImport, $request->file('file'));
+
+    //     return redirect()->route('admin.participants.index')->with('success', 'Participants imported successfully!');
+    // }
     public function import(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,csv'
         ]);
 
-        Excel::import(new ParticipantsImport, $request->file('file'));
+        Excel::import(new ParticipantsImport(), $request->file('file'));
 
-        return redirect()->route('admin.participants.index')->with('success', 'Participants imported successfully!');
+        return redirect()->route('participants.index')->with('success', 'Participants imported successfully!');
     }
 }
