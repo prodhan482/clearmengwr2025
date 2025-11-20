@@ -20,6 +20,10 @@ class ParticipantController extends Controller
     {
         return view('admin.participants.create');
     }
+    public function singlycreate()
+    {
+        return view('admin.participants.singlecreate');
+    }
 
     public function store(Request $request)
     {
@@ -41,6 +45,10 @@ class ParticipantController extends Controller
     public function edit(Participant $participant)
     {
         return view('admin.participants.edit', compact('participant'));
+    }
+    public function show(Participant $participant)
+    {
+        return view('admin.participants.show', compact('participant'));
     }
 
     public function update(Request $request, Participant $participant)

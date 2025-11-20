@@ -36,11 +36,11 @@
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                 <h1 class="h2 mb-0 text-gray-800 text-info font-weight-bold">Participants Management</h1>
                                 <div>
-                                    <a href="{{ route('participants.create') }}"
+                                    <a href="{{ route('participants.singlycreate') }}"
                                         class="d-none d-sm-inline-block btn-sm btn-primary shadow-sm">
                                         <i class="fa fa-plus"></i> Add New Participant
                                     </a>
-                                    <a href="{{ route('participants.importForm') }}"
+                                    <a href="{{ route('participants.create') }}"
                                         class="d-none d-sm-inline-block btn-sm btn-success shadow-sm">
                                         <i class="fa fa-file-import"></i> Import CSV/Excel
                                     </a>
