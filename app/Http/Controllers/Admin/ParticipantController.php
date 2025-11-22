@@ -20,22 +20,44 @@ class ParticipantController extends Controller
     {
         return view('admin.participants.create');
     }
+
     public function singlycreate()
     {
         return view('admin.participants.singlecreate');
     }
 
+    /**
+     * Extract Google Drive File ID from full URL or plain ID
+     */
+    private function extractDriveId($value)
+    {
+        if (!$value) return null;
+
+        // If full Google Drive URL
+        if (str_contains($value, 'drive.google.com')) {
+            preg_match('/\/d\/(.*?)\//', $value, $match);
+            return $match[1] ?? null;
+        }
+
+        // Otherwise assume it's already a file ID
+        return $value;
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'code_number' => 'required|string|unique:participants,code_number',
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email',
-            'phone' => 'nullable|string',
-            'notes' => 'nullable|string',
+            'code_number'        => 'required|string|unique:participants,code_number',
+            'name'               => 'required|string|max:255',
+            'email'              => 'nullable|email',
+            'phone'              => 'nullable|string',
+            'notes'              => 'nullable|string',
             'drive_video_file_id' => 'nullable|string',
             'drive_image_file_id' => 'nullable|string',
         ]);
+
+        // Extract Google Drive IDs safely
+        $validated['drive_video_file_id'] = $this->extractDriveId($validated['drive_video_file_id']);
+        $validated['drive_image_file_id'] = $this->extractDriveId($validated['drive_image_file_id']);
 
         Participant::create($validated);
 
@@ -46,6 +68,7 @@ class ParticipantController extends Controller
     {
         return view('admin.participants.edit', compact('participant'));
     }
+
     public function show(Participant $participant)
     {
         return view('admin.participants.show', compact('participant'));
@@ -53,7 +76,22 @@ class ParticipantController extends Controller
 
     public function update(Request $request, Participant $participant)
     {
-        $participant->update($request->all());
+        $validated = $request->validate([
+            'code_number'        => 'required|string|unique:participants,code_number,' . $participant->id,
+            'name'               => 'required|string|max:255',
+            'email'              => 'nullable|email',
+            'phone'              => 'nullable|string',
+            'notes'              => 'nullable|string',
+            'drive_video_file_id' => 'nullable|string',
+            'drive_image_file_id' => 'nullable|string',
+        ]);
+
+        // Extract Drive IDs again during update
+        $validated['drive_video_file_id'] = $this->extractDriveId($validated['drive_video_file_id']);
+        $validated['drive_image_file_id'] = $this->extractDriveId($validated['drive_image_file_id']);
+
+        $participant->update($validated);
+
         return redirect()->route('participants.index')->with('success', 'Participant updated!');
     }
 
@@ -68,16 +106,6 @@ class ParticipantController extends Controller
         return view('admin.participants.import');
     }
 
-    // public function import(Request $request)
-    // {
-    //     $request->validate([
-    //         'file' => 'required|mimes:xlsx,csv'
-    //     ]);
-
-    //     Excel::import(new ParticipantsImport, $request->file('file'));
-
-    //     return redirect()->route('admin.participants.index')->with('success', 'Participants imported successfully!');
-    // }
     public function import(Request $request)
     {
         $request->validate([
