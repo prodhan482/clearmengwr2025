@@ -63,6 +63,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('participants/{participant}', [ParticipantController::class, 'update'])->name('participants.update');
     Route::delete('participants/{participant}', [ParticipantController::class, 'destroy'])->name('participants.destroy');
 
+    Route::get('/admin/participants/json', [ParticipantController::class, 'jsonAdmin'])
+        ->name('participants.json.admin');
+
+
     // Additional route for CSV/Excel import form
     Route::get('participants/import', [ParticipantController::class, 'importForm'])->name('participants.importForm');
 
@@ -83,6 +87,9 @@ Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/user-dashboard', [ParticipantController::class, 'userDashboard'])->name('user-dashboard');
+    Route::get('/participants-json', [ParticipantController::class, 'participantsJson'])
+        ->name('participants.json');
+
     // Route::get('/user-dashboard', [ParticipantController::class, 'participantsList'])->name('user-dashboard');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

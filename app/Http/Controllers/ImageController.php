@@ -18,9 +18,9 @@ class ImageController extends Controller
             ->where('is_active', true)
             ->get();
 
-        // Add your participants videos (8 videos)
+        // Add your participants videos (8 videos) sorted by video chain serial
         $participants = Participant::whereNotNull('drive_video_file_id')
-            ->oldest()
+            ->orderBy('video_chain_serial', 'asc')
             ->take(9)
             ->get();
 

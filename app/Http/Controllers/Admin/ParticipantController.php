@@ -7,6 +7,7 @@ use App\Imports\ParticipantsImport;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class ParticipantController extends Controller
 {
@@ -16,10 +17,60 @@ class ParticipantController extends Controller
         return view('admin.participants.index', compact('participants'));
     }
 
+
+    public function jsonAdmin()
+    {
+        $participants = Participant::select('*');
+
+        return datatables()
+            ->of($participants)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                return '
+                <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
+                <a href="' . route('participants.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>
+                <form action="' . route('participants.destroy', $row->id) . '" method="POST" style="display:inline">
+                    ' . csrf_field() . method_field("DELETE") . '
+                    <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                </form>
+            ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+
+
     public function userDashboard()
     {
-        $participants = Participant::orderBy('video_chain_serial', 'asc')->paginate(10000);
-        return view('web.participants.dashboard', compact('participants'));
+        return view('web.participants.dashboard');
+    }
+
+    public function participantsJson(Request $request)
+    {
+        $query = Participant::select([
+            'id',
+            'video_chain_serial',
+            'name',
+            'email',
+            'location',
+            'drive_video_file_id',
+            'drive_image_file_id'
+        ])->orderBy('video_chain_serial', 'asc');
+
+        return DataTables::of($query)
+            ->addColumn('action', function ($row) {
+                return '
+                    <button class="btn btn-primary btn-sm view-attempts"
+                        data-name="' . $row->name . '"
+                        data-video="' . $row->drive_video_file_id . '"
+                        data-image="' . $row->drive_image_file_id . '">
+                        View Attempts
+                    </button>
+                ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     public function create()
