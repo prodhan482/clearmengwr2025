@@ -22,16 +22,11 @@
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
                 <div class="card">
-                    <div class="card-body">
-
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h2 mb-0 text-info font-weight-bold">Create New Participant</h1>
-
-                            <a href="{{ route('participants.index') }}" class="btn-sm btn-danger shadow-sm">
-                                <i class="fa fa-backward mr-2"></i> Back
-                            </a>
-                        </div>
-
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <h1 class="h2 text-info font-weight-bold">Create New Participant</h1>
+                        <a href="{{ route('participants.index') }}" class="btn-sm btn-danger shadow-sm">
+                            <i class="fa fa-backward mr-2"></i> Back
+                        </a>
                     </div>
                 </div>
             </div>
@@ -44,63 +39,87 @@
 
                     <div class="row">
 
+                        {{-- Date Taken --}}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <strong>Date Taken <span class="text-danger">*</span>:</strong>
+                                {!! Form::date('date_taken', null, ['class' => 'form-control', 'required']) !!}
+                            </div>
+                        </div>
+
+                        {{-- Location --}}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <strong>Location:</strong>
+                                {!! Form::text('location', null, ['class' => 'form-control', 'placeholder' => 'Location']) !!}
+                            </div>
+                        </div>
+
+                        {{-- Camera No --}}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <strong>Camera No.:</strong>
+                                {!! Form::text('camera_no', null, ['class' => 'form-control', 'placeholder' => 'Camera Number']) !!}
+                            </div>
+                        </div>
+
+                        {{-- Participant Name --}}
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>Code Number:</strong>
-                                {!! Form::text('code_number', null, ['class' => 'form-control', 'placeholder' => 'Code Number']) !!}
+                                <strong>Participant Name <span class="text-danger">*</span>:</strong>
+                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Full Name', 'required']) !!}
                             </div>
                         </div>
 
+                        {{-- Email --}}
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>Name:</strong>
-                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Full Name']) !!}
+                                <strong>Email Address:</strong>
+                                {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) !!}
                             </div>
                         </div>
 
+                        {{-- Drive Image File ID --}}
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>Email:</strong>
-                                {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email Address']) !!}
+                                <strong>Drive Image File ID / URL:</strong>
+                                {!! Form::text('drive_image_file_id', null, ['class' => 'form-control', 'placeholder' => 'File ID or full Google Drive URL']) !!}
                             </div>
                         </div>
 
+                        {{-- Drive Video File ID --}}
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>Phone:</strong>
-                                {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => 'Phone Number']) !!}
+                                <strong>Drive Video File ID / URL:</strong>
+                                {!! Form::text('drive_video_file_id', null, ['class' => 'form-control', 'placeholder' => 'File ID or full Google Drive URL']) !!}
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        {{-- Image Library File No --}}
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <strong>Drive Image File ID:</strong>
-                                {!! Form::text('drive_image_file_id', null, [
-                                    'class' => 'form-control',
-                                    'placeholder' => 'Google Drive Image ID',
-                                ]) !!}
-                                <small class="text-muted">Only the **file ID** (not the full URL)</small>
+                                <strong>Image Library File No.:</strong>
+                                {!! Form::text('image_library_file_no', null, ['class' => 'form-control', 'placeholder' => 'Image Library #']) !!}
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        {{-- Video Library File No --}}
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <strong>Drive Video File ID:</strong>
-                                {!! Form::text('drive_video_file_id', null, [
-                                    'class' => 'form-control',
-                                    'placeholder' => 'Google Drive Video ID',
-                                ]) !!}
-                                <small class="text-muted">Only the **file ID**</small>
+                                <strong>Video Library File No.:</strong>
+                                {!! Form::text('video_library_file_no', null, ['class' => 'form-control', 'placeholder' => 'Video Library #']) !!}
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        {{-- Video Chain Serial --}}
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <strong>Notes:</strong>
-                                {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'Notes']) !!}
+                                <strong>Video Chain Serial:</strong>
+                                {!! Form::text('video_chain_serial', null, ['class' => 'form-control', 'placeholder' => 'Video Chain Serial']) !!}
                             </div>
                         </div>
 
+                        {{-- Submit Button --}}
                         <div class="col-md-12 text-center mt-3">
                             <button type="submit" class="btn btn-primary px-4">Submit</button>
                         </div>

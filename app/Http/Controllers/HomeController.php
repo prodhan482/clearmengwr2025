@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Participant;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,9 +22,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    // public function index()
+    // {
+    //     return view('web.home');
+    // }
     public function index()
     {
-        return view('web.home');
+        $participants = Participant::whereNotNull('drive_video_file_id')
+            ->latest()
+            ->take(8)
+            ->get();
+
+        return view('web.home', compact('participants'));
     }
 
     public function participantsList()

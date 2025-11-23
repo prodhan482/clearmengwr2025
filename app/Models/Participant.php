@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Participant extends Model
 {
     protected $fillable = [
-        'code_number',
+        'date_taken',
+        'location',
+        'camera_no',
         'name',
         'email',
-        'phone',
-        'notes',
         'drive_video_file_id',
-        'drive_image_file_id'
+        'drive_image_file_id',
+        'image_library_file_no',
+        'video_library_file_no',
+        'video_chain_serial',
     ];
 }

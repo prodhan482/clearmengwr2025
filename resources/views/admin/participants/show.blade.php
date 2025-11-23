@@ -107,13 +107,18 @@
 
                     <div class="info-section">
                         <div class="info-card">
-                            <h5><i class="fas fa-hashtag fa-icon"></i> Serial Number</h5>
-                            <p>{{ $participant->serial_number }}</p>
+                            <h5><i class="fas fa-calendar-alt fa-icon"></i> Date Taken</h5>
+                            <p>{{ $participant->date_taken ?? 'N/A' }}</p>
                         </div>
 
                         <div class="info-card">
-                            <h5><i class="fas fa-barcode fa-icon"></i> Code Number</h5>
-                            <p>{{ $participant->code_number }}</p>
+                            <h5><i class="fas fa-map-marker-alt fa-icon"></i> Location</h5>
+                            <p>{{ $participant->location ?? 'N/A' }}</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h5><i class="fas fa-camera fa-icon"></i> Camera No.</h5>
+                            <p>{{ $participant->camera_no ?? 'N/A' }}</p>
                         </div>
 
                         <div class="info-card">
@@ -123,17 +128,7 @@
 
                         <div class="info-card">
                             <h5><i class="fas fa-envelope fa-icon"></i> Email</h5>
-                            <p>{{ $participant->email }}</p>
-                        </div>
-
-                        <div class="info-card">
-                            <h5><i class="fas fa-phone fa-icon"></i> Phone</h5>
-                            <p>{{ $participant->phone ?? 'N/A' }}</p>
-                        </div>
-
-                        <div class="info-card">
-                            <h5><i class="fas fa-sticky-note fa-icon"></i> Notes</h5>
-                            <p>{{ $participant->notes ?? 'N/A' }}</p>
+                            <p>{{ $participant->email ?? 'N/A' }}</p>
                         </div>
 
                         <div class="info-card">
@@ -154,6 +149,21 @@
                             @else
                                 <p>N/A</p>
                             @endif
+                        </div>
+
+                        <div class="info-card">
+                            <h5><i class="fas fa-images fa-icon"></i> Image Library File No.</h5>
+                            <p>{{ $participant->image_library_file_no ?? 'N/A' }}</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h5><i class="fas fa-video fa-icon"></i> Video Library File No.</h5>
+                            <p>{{ $participant->video_library_file_no ?? 'N/A' }}</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h5><i class="fas fa-link fa-icon"></i> Video Chain Serial</h5>
+                            <p>{{ $participant->video_chain_serial ?? 'N/A' }}</p>
                         </div>
 
                         <div class="info-card">

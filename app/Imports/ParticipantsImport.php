@@ -13,16 +13,32 @@ class ParticipantsImport implements ToModel, WithHeadingRow
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+    private function extractDriveId($value)
+    {
+        if (!$value)
+            return null;
+
+        if (str_contains($value, 'drive.google.com')) {
+            preg_match('/\/d\/(.*?)\//', $value, $match);
+            return $match[1] ?? null;
+        }
+
+        return $value;
+    }
+
     public function model(array $row)
     {
         return new Participant([
-            'code_number' => trim($row['code_number'] ?? ''),
-            'name' => trim($row['name'] ?? ''),
+            'date_taken' => trim($row['date_taken'] ?? null),
+            'location' => trim($row['location'] ?? null),
+            'camera_no' => trim($row['camera_no'] ?? null),
+            'name' => trim($row['name'] ?? null),
             'email' => trim($row['email'] ?? null),
-            'phone' => trim($row['phone'] ?? null),
-            'notes' => trim($row['notes'] ?? null),
-            'drive_video_file_id' => trim($row['drive_video_file_id'] ?? null),
-            'drive_image_file_id' => trim($row['drive_image_file_id'] ?? null),
+            'drive_video_file_id' => $this->extractDriveId($row['drive_video_file_id'] ?? null),
+            'drive_image_file_id' => $this->extractDriveId($row['drive_image_file_id'] ?? null),
+            'image_library_file_no' => trim($row['image_library_file_no'] ?? null),
+            'video_library_file_no' => trim($row['video_library_file_no'] ?? null),
+            'video_chain_serial' => trim($row['video_chain_serial'] ?? null),
         ]);
     }
 

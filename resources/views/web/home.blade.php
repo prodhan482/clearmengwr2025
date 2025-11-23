@@ -112,7 +112,8 @@
                     <div class="col-lg-10 col-12">
                         <h2 class="text-white mb-4">Register Here</h2>
 
-                        <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST" role="form">
+                        <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST"
+                            role="form">
                             @csrf
 
                             <!-- Inputs -->
@@ -141,7 +142,7 @@
 
 
 
-    <section class="section-padding" id="section_3">
+    {{-- <section class="section-padding" id="section_3">
         <div class="container">
             <div class="row">
 
@@ -288,7 +289,46 @@
             <!-- Register to View All -->
 
         </div>
+    </section> --}}
+
+
+    <section class="section-padding" id="section_3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12 text-center mb-4">
+                    <h2>OFFICIAL ATTEMPTS</h2>
+                </div>
+                <div class="row g-4">
+                @foreach($participants as $participant)
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block-wrap">
+                            <div class="video-wrapper"
+                                style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
+                                    style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                    allow="autoplay" allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="custom-block">
+                                <a href="" class="custom-btn btn">{{ $participant->name ?? 'Name' }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br><br><br><br>
+                @endforeach
+            </div>
+        </div>
+        <br><br><br><br><br>
+
+        <!-- Show More Button -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="/participants"><button class="btn btn-primary custom-btn">Show More</button></a>
+            </div>
+        </div>
+        </div>
     </section>
+
 
 
     {{-- SweetAlert2 CDN --}}

@@ -133,7 +133,7 @@
                             <small class="alert alert-warning" role="alert">
                                 <i class="fas fa-exclamation-triangle mr-1"></i>
                                 <strong>Warning:</strong> Ensure your CSV/Excel file follows the correct format:
-                                <code>serial_number, code_number, name, email, phone, notes, drive_video_file_id, drive_image_file_id</code>.
+                                <code>Add all required field.</code>.
                             </small>
                             <div class="mt-4 d-flex justify-content-end">
                                 <button type="submit" id="uploadBtn" class="btn btn-primary" disabled>Upload

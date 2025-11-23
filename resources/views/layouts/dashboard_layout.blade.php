@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/hvl2.avif') }}">
     <title>HVL IT || Dashboard</title>
 
 
@@ -50,8 +50,9 @@
 
         <!-- Preloader -->
         {{-- <div class="preloader flex-column justify-content-center align-items-center">
-  <img class="animation__shake" src="{{asset('dist/img/smet-logo.jpg')}}" alt="SMET_LOGO" height="60" width="60">
-</div> --}}
+            <img class="animation__shake" src="{{asset('dist/img/smet-logo.jpg')}}" alt="SMET_LOGO" height="60"
+                width="60">
+        </div> --}}
 
         <!-- Navbar -->
         @include('include.dashboard.dashboard-navbar')
@@ -125,12 +126,12 @@
         var url = window.location;
 
         // for sidebar menu entirely but not cover treeview
-        $('ul.nav-sidebar a').filter(function() {
+        $('ul.nav-sidebar a').filter(function () {
             return this.href == url;
         }).addClass('active');
 
         // for treeview
-        $('ul.nav-treeview a').filter(function() {
+        $('ul.nav-treeview a').filter(function () {
             return this.href == url;
         }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
     </script>

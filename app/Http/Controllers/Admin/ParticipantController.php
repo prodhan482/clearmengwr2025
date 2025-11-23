@@ -12,8 +12,14 @@ class ParticipantController extends Controller
 {
     public function index()
     {
-        $participants = Participant::paginate(50);
+        $participants = Participant::orderBy('video_chain_serial', 'asc')->paginate(1000);
         return view('admin.participants.index', compact('participants'));
+    }
+
+    public function userDashboard()
+    {
+        $participants = Participant::orderBy('video_chain_serial', 'asc')->paginate(10000);
+        return view('web.participants.dashboard', compact('participants'));
     }
 
     public function create()
@@ -31,31 +37,32 @@ class ParticipantController extends Controller
      */
     private function extractDriveId($value)
     {
-        if (!$value) return null;
+        if (!$value)
+            return null;
 
-        // If full Google Drive URL
         if (str_contains($value, 'drive.google.com')) {
             preg_match('/\/d\/(.*?)\//', $value, $match);
             return $match[1] ?? null;
         }
 
-        // Otherwise assume it's already a file ID
         return $value;
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'code_number'        => 'required|string|unique:participants,code_number',
-            'name'               => 'required|string|max:255',
-            'email'              => 'nullable|email',
-            'phone'              => 'nullable|string',
-            'notes'              => 'nullable|string',
+            'date_taken' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
+            'camera_no' => 'nullable|string|max:50',
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
             'drive_video_file_id' => 'nullable|string',
             'drive_image_file_id' => 'nullable|string',
+            'image_library_file_no' => 'nullable|string',
+            'video_library_file_no' => 'nullable|string',
+            'video_chain_serial' => 'nullable|string',
         ]);
 
-        // Extract Google Drive IDs safely
         $validated['drive_video_file_id'] = $this->extractDriveId($validated['drive_video_file_id']);
         $validated['drive_image_file_id'] = $this->extractDriveId($validated['drive_image_file_id']);
 
@@ -77,16 +84,18 @@ class ParticipantController extends Controller
     public function update(Request $request, Participant $participant)
     {
         $validated = $request->validate([
-            'code_number'        => 'required|string|unique:participants,code_number,' . $participant->id,
-            'name'               => 'required|string|max:255',
-            'email'              => 'nullable|email',
-            'phone'              => 'nullable|string',
-            'notes'              => 'nullable|string',
+            'date_taken' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
+            'camera_no' => 'nullable|string|max:50',
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
             'drive_video_file_id' => 'nullable|string',
             'drive_image_file_id' => 'nullable|string',
+            'image_library_file_no' => 'nullable|string',
+            'video_library_file_no' => 'nullable|string',
+            'video_chain_serial' => 'nullable|string',
         ]);
 
-        // Extract Drive IDs again during update
         $validated['drive_video_file_id'] = $this->extractDriveId($validated['drive_video_file_id']);
         $validated['drive_image_file_id'] = $this->extractDriveId($validated['drive_image_file_id']);
 

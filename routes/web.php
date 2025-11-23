@@ -74,15 +74,16 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/images/{type}', [ImageController::class, 'getHeroImages']);
 Route::GET('/', [ImageController::class, 'getHeroImages'])->name('home');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', [ImageController::class, 'getHeroImages'])->name('home');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::post('/register', [RegisterController::class, 'register'])->name('register.create');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/user-dashboard', [HomeController::class, 'participantsList'])->name('user-dashboard');
+    Route::get('/user-dashboard', [ParticipantController::class, 'userDashboard'])->name('user-dashboard');
+    // Route::get('/user-dashboard', [ParticipantController::class, 'participantsList'])->name('user-dashboard');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 

@@ -12,16 +12,20 @@ return new class extends Migration {
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->string('code_number')->index();
-            $table->string('name');
-            $table->string('email')->nullable()->index();
-            $table->string('phone')->nullable();
-            $table->text('notes')->nullable();
+            $table->string('date_taken')->nullable();  // Date Taken
+            $table->string('location')->nullable();  // Location
+            $table->string('camera_no')->nullable();  // Camera No.
+            $table->string('name')->nullable();  // Participant Name
+            $table->string('email')->nullable()->index();  // Email Address
 
-            // Google Drive file ids (store file IDs, not full URLs)
+            // Google Drive file IDs
             $table->string('drive_video_file_id')->nullable()->index();
-            $table->string('drive_image_file_id')->nullable();
+            $table->string('drive_image_file_id')->nullable()->index();
 
+            // Library and serial fields
+            $table->string('image_library_file_no')->nullable();
+            $table->string('video_library_file_no')->nullable();
+            $table->string('video_chain_serial')->nullable()->index();
             $table->timestamps();
         });
     }

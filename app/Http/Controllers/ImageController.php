@@ -3,19 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
     // 1. Fetch active hero images for frontend
+
     public function getHeroImages()
     {
+        // Hero images already working
         $images = Image::where('type', 'hero')
             ->where('is_active', true)
             ->get();
 
-        return view('web.home', compact('images'));
+        // Add your participants videos (8 videos)
+        $participants = Participant::whereNotNull('drive_video_file_id')
+            ->oldest()
+            ->take(9)
+            ->get();
+
+        // return both variables to the same view
+        return view('web.home', compact('images', 'participants'));
     }
 
     // 2. List all images (admin)
@@ -52,7 +62,8 @@ class ImageController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        return redirect()->route('admin.images.index')
+        return redirect()
+            ->route('admin.images.index')
             ->with('success', 'Image uploaded successfully.');
     }
 
@@ -95,7 +106,8 @@ class ImageController extends Controller
         $image->is_active = $request->has('is_active');
         $image->save();
 
-        return redirect()->route('admin.images.index')
+        return redirect()
+            ->route('admin.images.index')
             ->with('success', 'Image updated successfully.');
     }
 
@@ -108,7 +120,8 @@ class ImageController extends Controller
 
         $image->delete();
 
-        return redirect()->route('admin.images.index')
+        return redirect()
+            ->route('admin.images.index')
             ->with('success', 'Image deleted successfully.');
     }
 
