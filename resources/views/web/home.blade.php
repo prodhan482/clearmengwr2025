@@ -303,7 +303,7 @@
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="custom-block-wrap">
                             <div class="video-wrapper"
-                                style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden;">
+                                style="position: relative; padding-bottom: 100%; height: 550px; overflow: hidden;">
                                 <iframe src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
                                     style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
                                     allow="autoplay" allowfullscreen>
