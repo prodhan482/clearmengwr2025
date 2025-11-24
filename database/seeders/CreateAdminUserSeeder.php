@@ -28,25 +28,25 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@highvoltage.ltd',
             'password' => Hash::make('hvl@admin2025'),
-            'phone' => '01999999999',
+            'phone' => '01999999990',
             ],
             [
             'name' => 'Manager',
             'email' => 'manager@highvoltage.ltd',
             'password' => Hash::make('hvl@manager2025'),
-            'phone' => '01999999999',
+            'phone' => '01999999991',
             ],
             [
             'name' => 'Support',
             'email' => 'activation@highvoltage.ltd',
             'password' => Hash::make('hvl@activation2025'),
-            'phone' => '01999999999',
+            'phone' => '01999999992',
             ],
             [
             'name' => 'Test',
             'email' => 'test@highvoltage.ltd',
             'password' => Hash::make('hvl@test2025'),
-            'phone' => '01999999999',
+            'phone' => '01999999993',
             ],
         ];
 
