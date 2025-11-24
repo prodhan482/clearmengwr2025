@@ -17,12 +17,42 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
+        $users = [
+            [
             'name' => 'HIGH VOLTAGE LTD.',
             'email' => 'dulal.prodhan@highvoltage.ltd',
             'password' => Hash::make('hvl2025'),
             'phone' => '01641366908',
-        ]);
+            ],
+            [
+            'name' => 'Admin User',
+            'email' => 'admin@highvoltage.ltd',
+            'password' => Hash::make('hvl@admin2025'),
+            'phone' => '01999999999',
+            ],
+            [
+            'name' => 'Manager',
+            'email' => 'manager@highvoltage.ltd',
+            'password' => Hash::make('hvl@manager2025'),
+            'phone' => '01999999999',
+            ],
+            [
+            'name' => 'Support',
+            'email' => 'activation@highvoltage.ltd',
+            'password' => Hash::make('hvl@activation2025'),
+            'phone' => '01999999999',
+            ],
+            [
+            'name' => 'Test',
+            'email' => 'test@highvoltage.ltd',
+            'password' => Hash::make('hvl@test2025'),
+            'phone' => '01999999999',
+            ],
+        ];
+
+        foreach ($users as $userData) {
+            $user = User::create($userData);
+        }
 
         $role = Role::findOrCreate('SUPER_ADMIN');
 
