@@ -258,7 +258,7 @@
         position: relative;
         width: 100%;
         padding-bottom: 70vh;
-        height: 0;
+        height: 100%;
         overflow: hidden;
         border-radius: 10px;
     }

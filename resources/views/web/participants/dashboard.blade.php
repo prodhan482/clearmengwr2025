@@ -268,12 +268,26 @@
             $('#attemptsModalLabel').text(name + " - Attempts");
 
             // Image
-            $('#attemptsImage').attr('src',
-                imageId ? `https://drive.google.com/file/d/${imageId}/preview` : '');
+            // Image
+            $('#attemptsImage')
+                .attr('src', imageId ? `https://drive.google.com/file/d/${imageId}/preview` : '')
+                .css({
+                    width: '100%',
+                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '600px',
+                    border: 'none',
+                    'border-radius': '8px'
+                });
 
             // Video
-            $('#attemptsVideo').attr('src',
-                videoId ? `https://drive.google.com/file/d/${videoId}/preview` : '');
+            $('#attemptsVideo')
+                .attr('src', videoId ? `https://drive.google.com/file/d/${videoId}/preview` : '')
+                .css({
+                    width: '100%',
+                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '600px',
+                    border: 'none',
+                    'border-radius': '8px'
+                })
+                .attr('allowfullscreen', videoId ? true : null);
 
             new bootstrap.Modal('#attemptsModal').show();
         });

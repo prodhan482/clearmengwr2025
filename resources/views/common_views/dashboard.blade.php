@@ -36,17 +36,17 @@
                 <div class="col-xl-12 col-md-12">
                     <div class="card user-card-full">
                         <div class="row m-l-0 m-r-0">
-                            <div class="col-md-4 bg-c-lite-green user-profile">
+                            <div class="col-md-4 bg-green user-profile">
                                 <div class="card-block text-center text-white">
                                     <div class="m-b-25">
                                             <span data-toggle="modal" data-target="#user_profile_photo_modal{{auth()->user()->id}}">
-                                                <img src="{{ asset('assets/images/hvl2.avif')}}" class="rounded-circle img-fluid" width="150" alt="User-Profile-Image">
-                                                <i class=" mdi mdi-square-edit-outline feather fas fa-edit m-t-10 f-16 text-dark" data-toggle="tooltip" data-placement="top" title="Upload Photo"></i>
+                                                <img src="{{ asset('assets/images/hvlwhite.png')}}" class="img-fluid" width="150" alt="User-Profile-Image">
+                                                {{-- <i class=" mdi mdi-square-edit-outline feather fas fa-edit m-t-10 f-16 text-dark" data-toggle="tooltip" data-placement="top" title="Upload Photo"></i> --}}
                                             </span>
                                     </div>
 
                                     <h4 class="font-weight-bold text-white font-times-new-roman">{{auth()->user()->name}}</h4>
-                                    <p class="text-dark font-weight-bold">
+                                    <p class="text-white font-weight-bold">
                                         Dashboard
                                     </p>
                                 </div>

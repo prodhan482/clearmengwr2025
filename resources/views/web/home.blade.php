@@ -2,6 +2,7 @@
 
 @section('title', 'Home | Clear Men Guinness World Records')
 
+
 @section('content')
 
     <section class="hero-section hero-section-full-height">
@@ -12,7 +13,8 @@
                         <div class="carousel-inner">
                             @foreach($images as $key => $image)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('storage/' . $image->image) }}" class="carousel-image img-fluid"
+                                    <img src="{{ asset('storage/' . $image->image) }}"
+                                        class="carousel-image img-fluid d-block w-100"
                                         alt="{{ $image->alt_text ?? 'Hero Image' }}">
 
                                     {{-- Optional caption --}}
@@ -299,33 +301,34 @@
                     <h2>OFFICIAL ATTEMPTS</h2>
                 </div>
                 <div class="row g-4">
-                @foreach($participants as $participant)
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                        <div class="custom-block-wrap">
-                            <div class="video-wrapper"
-                                style="position: relative; padding-bottom: 100%; height: 550px; overflow: hidden;">
-                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
-                                    style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
-                                    allow="autoplay" allowfullscreen>
-                                </iframe>
-                            </div>
-                            <div class="custom-block">
-                                <a href="" class="custom-btn btn">{{ $participant->name ?? 'Name' }}</a>
+                    @foreach($participants as $participant)
+                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                            <div class="custom-block-wrap">
+                                <div class="video-wrapper"
+                                    style="position: relative; padding-bottom: 100%; height: 550px; overflow: hidden;">
+                                    <iframe
+                                        src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
+                                        style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+                                        allow="autoplay" allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="custom-block">
+                                    <a href="" class="custom-btn btn">{{ $participant->name ?? 'Name' }}</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br><br><br><br><br>
-                @endforeach
+                        <br><br><br><br><br>
+                    @endforeach
+                </div>
             </div>
-        </div>
-        <br><br><br><br><br>
+            <br><br><br><br><br>
 
-        <!-- Show More Button -->
-        <div class="row mt-4">
-            <div class="col-12 text-center">
-                <a href="/participants"><button class="btn btn-primary custom-btn">Show More</button></a>
+            <!-- Show More Button -->
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <a href="/participants"><button class="btn btn-primary custom-btn">Show More</button></a>
+                </div>
             </div>
-        </div>
         </div>
     </section>
 
