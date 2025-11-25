@@ -294,43 +294,140 @@
     </section> --}}
 
 
+
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for Play Icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
     <section class="section-padding" id="section_3">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-12 text-center mb-4">
+                <div class="col-lg-12 text-center mb-4">
                     <h2>OFFICIAL ATTEMPTS</h2>
                 </div>
-                <div class="row g-4">
-                    @foreach($participants as $participant)
-                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                            <div class="custom-block-wrap">
-                                <div class="video-wrapper"
-                                    style="position: relative; padding-bottom: 100%; height: 550px; overflow: hidden;">
-                                    <iframe
-                                        src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
-                                        style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
-                                        allow="autoplay" allowfullscreen>
-                                    </iframe>
-                                </div>
-                                <div class="custom-block">
-                                    <a href="" class="custom-btn btn">{{ $participant->name ?? 'Name' }}</a>
+            </div>
+
+            <div class="row g-4">
+                @foreach($participants as $participant)
+                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                        <div class="custom-block-wrap position-relative viewPreview" style="cursor:pointer;"
+                            data-id="{{ $participant->drive_video_file_id }}" data-name="{{ $participant->name ?? 'Name' }}"
+                            data-type="Video">
+
+                            <!-- Video Thumbnail with Zoom -->
+                            <div class="video-wrapper"
+                                style="position: relative; padding-bottom: 100%; overflow: hidden; border-radius: 10px;">
+                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview"
+                                    class="video-thumbnail"
+                                    style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0; transform: scale(1.3); object-fit: cover;"
+                                    allowfullscreen>
+                                </iframe>
+
+                                <!-- Hover Play Icon -->
+                                <div class="hover-play-icon d-flex justify-content-center align-items-center">
+                                    <i class="fas fa-play-circle" style="font-size: 60px; color: rgba(255,255,255,0.8);"></i>
                                 </div>
                             </div>
+
+                            <div class="custom-block mt-2 text-center">
+                                <a href="javascript:void(0);" class="custom-btn btn">{{ $participant->name ?? 'Name' }}</a>
+                            </div>
                         </div>
-                        <br><br><br><br><br>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
-            <br><br><br><br><br>
 
             <!-- Show More Button -->
             <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <a href="/participants"><button class="btn btn-primary custom-btn">Show More</button></a>
+                    <a href="/participants">
+                        <button class="btn btn-primary custom-btn">Show More</button>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Bootstrap 5 Modal -->
+    <div class="modal fade" id="previewModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- modal-xl for larger/resizable -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="fullscreen-iframe-wrapper"
+                        style="position:relative;padding-bottom:20%;height:800px;overflow:hidden;">
+                        <iframe id="previewIframe" style="position:absolute;top:0;left:10%;width:80%;height:100%;border:0;"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Styles -->
+    <style>
+        .hover-play-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-block-wrap:hover .hover-play-icon {
+            opacity: 1;
+        }
+
+        /* Optional: smooth zoom on hover */
+        .video-thumbnail {
+            transition: transform 0.3s ease;
+        }
+
+        .custom-block-wrap:hover .video-thumbnail {
+            transform: scale(1.35);
+            /* zoom more on hover */
+        }
+    </style>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery for click handling -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Modal Script -->
+    <script>
+        $(document).on("click", ".viewPreview", function () {
+            let type = $(this).data("type");
+            let id = $(this).data("id");
+            let name = $(this).data("name");
+
+            $("#previewTitle").text(`${type} Preview – ${name}`);
+            $("#previewIframe").attr("src", `https://drive.google.com/file/d/${id}/preview`);
+
+            // Show modal using Bootstrap 5
+            var previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+            previewModal.show();
+        });
+
+        // Stop video when modal is closed
+        var modalEl = document.getElementById('previewModal');
+        modalEl.addEventListener('hidden.bs.modal', function () {
+            $("#previewIframe").attr("src", '');
+        });
+    </script>
+
+
+
 
 
 

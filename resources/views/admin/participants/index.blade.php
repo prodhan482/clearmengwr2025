@@ -258,7 +258,7 @@
         position: relative;
         width: 100%;
         padding-bottom: 70vh;
-        height: 100%;
+        height: 550px;
         overflow: hidden;
         border-radius: 10px;
     }
@@ -352,7 +352,7 @@
 
 <!-- Modal for Viewing Image/Video -->
 <div class="modal fade" id="previewModal" tabindex="-1">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-dialog modal modal-dialog-centered">
         <div class="modal-content">
 
             <div class="modal-header">

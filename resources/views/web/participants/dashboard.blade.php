@@ -273,7 +273,7 @@
                 .attr('src', imageId ? `https://drive.google.com/file/d/${imageId}/preview` : '')
                 .css({
                     width: '100%',
-                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '600px',
+                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '700px',
                     border: 'none',
                     'border-radius': '8px'
                 });
@@ -283,7 +283,7 @@
                 .attr('src', videoId ? `https://drive.google.com/file/d/${videoId}/preview` : '')
                 .css({
                     width: '100%',
-                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '600px',
+                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '700px',
                     border: 'none',
                     'border-radius': '8px'
                 })

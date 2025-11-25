@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Participants CRUD
     // Participants CRUD (explicit routes)
-    Route::get('participants', [ParticipantController::class, 'index'])->name('participants.index');
+    Route::get('/admin/participants', [ParticipantController::class, 'index'])->name('participants.index');
     Route::get('participants/create', [ParticipantController::class, 'create'])->name('participants.create');
     Route::get('participants/singlycreate', [ParticipantController::class, 'singlycreate'])->name('participants.singlycreate');
     Route::post('participants', [ParticipantController::class, 'store'])->name('participants.store');
