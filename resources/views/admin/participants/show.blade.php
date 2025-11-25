@@ -126,16 +126,15 @@
                             <p>{{ $participant->name }}</p>
                         </div>
 
-                        <div class="info-card">
-                            <h5><i class="fas fa-envelope fa-icon"></i> Email</h5>
-                            <p>{{ $participant->email ?? 'N/A' }}</p>
-                        </div>
+
 
                         <div class="info-card">
                             <h5><i class="fas fa-video fa-icon"></i> Drive Video</h5>
                             @if($participant->drive_video_file_id)
-                                <a href="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/view"
-                                    target="_blank" class="drive-link">View Video</a>
+                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
+                                    width="100%" height="550" frameborder="0"
+                                    allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen class="drive-link"
+                                    style="border-radius:8px;"></iframe>
                             @else
                                 <p>N/A</p>
                             @endif
@@ -144,11 +143,18 @@
                         <div class="info-card">
                             <h5><i class="fas fa-image fa-icon"></i> Drive Image</h5>
                             @if($participant->drive_image_file_id)
-                                <a href="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/view"
-                                    target="_blank" class="drive-link">View Image</a>
+                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview"
+                                    width="100%" height="550" frameborder="0"
+                                    allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen class="drive-link"
+                                    style="border-radius:8px;"></iframe>
                             @else
                                 <p>N/A</p>
                             @endif
+                        </div>
+
+                        <div class="info-card">
+                            <h5><i class="fas fa-envelope fa-icon"></i> Email</h5>
+                            <p>{{ $participant->email ?? 'N/A' }}</p>
                         </div>
 
                         <div class="info-card">

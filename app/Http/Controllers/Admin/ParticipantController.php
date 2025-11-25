@@ -17,29 +17,26 @@ class ParticipantController extends Controller
         return view('admin.participants.index', compact('participants'));
     }
 
-
     public function jsonAdmin()
     {
-        $participants = Participant::select('*');
+        $participants = Participant::orderBy('video_chain_serial', 'asc');
 
         return datatables()
             ->of($participants)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 return '
-                <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
-                <a href="' . route('participants.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>
-                <form action="' . route('participants.destroy', $row->id) . '" method="POST" style="display:inline">
-                    ' . csrf_field() . method_field("DELETE") . '
-                    <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
-                </form>
-            ';
+            <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
+            <a href="' . route('participants.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>
+            <form action="' . route('participants.destroy', $row->id) . '" method="POST" style="display:inline">
+                ' . csrf_field() . method_field('DELETE') . '
+                <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
+            </form>
+        ';
             })
             ->rawColumns(['action'])
             ->make(true);
     }
-
-
 
     public function userDashboard()
     {

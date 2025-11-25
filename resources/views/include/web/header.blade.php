@@ -50,20 +50,22 @@
                     <li class="nav-item">
                         <span class="nav-link">{{ Auth::user()->name }}</span>
                     </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="{{'/user-dashboard'}}">Participants List</a>
-                        </li>
-                    {{-- @can('super-admin')
+                    @if(!Request::is('user-dashboard'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{'/dashbaord'}}">Dashboard</a>
+                            <a class="nav-link" href="{{ '/user-dashboard' }}">Participants List</a>
                         </li>
+                    @endif
+                    {{-- @can('super-admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{'/dashbaord'}}">Dashboard</a>
+                    </li>
                     @endcan --}}
 
                     <li class="nav-item ms-3">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="nav-link custom-btn custom-border-btn btn-danger" type="submit"
-                                style="border:black;">Logout</button>
+                            <button class="nav-link2 custom-btn btn smoothscroll" type="submit"
+                                style="border:rgb(216, 216, 216);">Logout</button>
                         </form>
                     </li>
 
@@ -83,6 +85,10 @@
 
 
 <style>
+    .nav-link2 {
+        font-weight: 500;
+        color: #ffffff !important;
+    }
     .navbar-brand span {
         white-space: nowrap;
     }
