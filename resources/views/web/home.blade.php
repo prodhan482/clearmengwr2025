@@ -91,7 +91,7 @@
                     <div class="col-lg-5 col-12">
                         <h2 style="font-size: 30px">Click here to view all attempts.</h2>
 
-                        <a href="{{'participants'}}" class="custom-btn btn smoothscroll">
+                        <a href="{{'/user-dashboard'}}" class="custom-btn btn smoothscroll">
                             G<i class="fas fa-thin fa-futbol" style="animation: bounce 1s infinite;"></i>
                         </a>
                     </div>
@@ -343,7 +343,7 @@
             <!-- Show More Button -->
             <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <a href="/participants">
+                    <a href="/user-dashboard">
                         <button class="btn btn-primary custom-btn">Show More</button>
                     </a>
                 </div>

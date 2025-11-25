@@ -64,8 +64,8 @@
                     <li class="nav-item ms-3">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="nav-link2 custom-btn btn smoothscroll" type="submit"
-                                style="border:rgb(216, 216, 216);">Logout</button>
+                            <button class="custom-btn btn smoothscroll" type="submit"
+                                style="border:rgb(0, 98, 190);">Logout</button>
                         </form>
                     </li>
 
@@ -85,10 +85,11 @@
 
 
 <style>
-    .nav-link2 {
+    .nav-custom-btn {
         font-weight: 500;
-        color: #ffffff !important;
+        color: #065daf !important;
     }
+
     .navbar-brand span {
         white-space: nowrap;
     }
