@@ -66,7 +66,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/participants/json', [ParticipantController::class, 'jsonAdmin'])
         ->name('participants.json.admin');
 
-
     // Additional route for CSV/Excel import form
     Route::get('participants/import', [ParticipantController::class, 'importForm'])->name('participants.importForm');
 
@@ -86,10 +85,12 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/user-dashboard', [ParticipantController::class, 'userDashboard'])->name('user-dashboard');
+    Route::get('/user-dashboard', [ParticipantController::class, 'participantsDashboard'])->name('user-dashboard');
     Route::get('/participants-json', [ParticipantController::class, 'participantsJson'])
         ->name('participants.json');
 
+    Route::get('/participant-dashboard', [ParticipantController::class, 'participantsDashboard'])
+        ->name('participants.dashboard');
     // Route::get('/user-dashboard', [ParticipantController::class, 'participantsList'])->name('user-dashboard');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

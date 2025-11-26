@@ -34,6 +34,7 @@ class ParticipantsImport implements ToModel, WithHeadingRow
             'camera_no' => trim($row['camera_no'] ?? null),
             'name' => trim($row['name'] ?? null),
             'email' => trim($row['email'] ?? null),
+            'phone' => trim($row['phone'] ?? null),
             'drive_video_file_id' => $this->extractDriveId($row['drive_video_file_id'] ?? null),
             'drive_image_file_id' => $this->extractDriveId($row['drive_image_file_id'] ?? null),
             'image_library_file_no' => trim($row['image_library_file_no'] ?? null),

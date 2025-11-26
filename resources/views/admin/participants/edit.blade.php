@@ -111,6 +111,17 @@
                                 <label>Camera No.</label>
                                 {!! Form::text('camera_no', $participant->camera_no, ['class' => 'form-control']) !!}
                             </div>
+                            <div class="form-group">
+                                <label>Phone (Bangladesh)</label>
+                                {!! Form::text('phone', $participant->phone, [
+        'class' => 'form-control',
+        'placeholder' => 'e.g. 01XXXXXXXXX or +8801XXXXXXXXX',
+        'pattern' => '^(?:\+?88)?01[3-9]\d{8}$',
+        'title' => 'Bangladeshi mobile number. Allowed: 01XXXXXXXXX or +8801XXXXXXXXX',
+        'inputmode' => 'tel'
+    ]) !!}
+                                <small class="form-text text-muted">Format: 01XXXXXXXXX or +8801XXXXXXXXX</small>
+                            </div>
                         </div>
 
                         {{-- Second Row: Name, Email --}}

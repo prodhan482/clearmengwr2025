@@ -47,7 +47,7 @@ class LoginController extends Controller
             $this->redirectTo = '/dashboard';
             return $this->redirectTo;
         } else
-            $this->redirectTo = '/user-dashboard';
+            $this->redirectTo = '/participant-dashboard';
         return $this->redirectTo;
 
         // return $next($request);
@@ -64,46 +64,34 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
-    {
-        $this->validateLogin($request);
+public function login(Request $request)
+{
+    // Validate input
+    $request->validate([
+        'login' => 'required|string',  // login can be email or phone
+        'password' => 'required|string|min:4'
+    ]);
 
-        if (
-            method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)
-        ) {
-            $this->fireLockoutEvent($request);
+    $loginField = $request->input('login');
 
-            return $this->sendLockoutResponse($request);
-        }
+    // Determine if login is phone or email
+    $fieldType = filter_var($loginField, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
 
-        if (is_numeric($request->input('phone'))) {
-            $user = User::wherePhone($request->input('phone'))->first();
-            if ($user && Hash::check($request->input('password'), $user->password)) {
-                // Password is correct
-            } else {
-                // Password is incorrect or user not found
-            }
-        } else {
-            $user = User::whereEmail($request->input('email'))->first();
-            if ($user && Hash::check($request->input('password'), $user->password)) {
-                // Password is correct
-            } else {
-                return redirect()->back()->with('wrong');
-            }
-        }
+    // Try to find user
+    $user = User::where($fieldType, $loginField)->first();
 
-        if ($user !== null) {
-            Auth::login($user);
-            return $this->sendLoginResponse($request);
-        }
-
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
-        return $this->sendFailedLoginResponse($request);
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        return redirect()->back()->withErrors([
+            'login' => 'Invalid credentials!'
+        ]);
     }
+
+    // Login successful
+    Auth::login($user);
+
+    return $this->sendLoginResponse($request);
+}
+
 
 
     public function logout(Request $request)

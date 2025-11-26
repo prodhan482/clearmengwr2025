@@ -1,303 +1,155 @@
-{{-- @extends('layouts.web')
-
-@section('title', 'Home | Clear Men Guinness World Records')
-
-@section('content')
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-
-<div class="container py-4">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1 class="display-6 fw-bold">Official Attempts List</h1>
-            <p class="text-muted mb-4">Search participants and view their recorded attempts.</p>
-        </div>
-    </div>
-</div>
-
-<div class="p-5">
-    <table id="datatable-json" class="table table-striped table-bordered table-hover w-100">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Number</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($participants as $participant)
-            <tr>
-                <td>{{ $participant->id }}</td>
-                <td>{{ $participant->name }}</td>
-                <td>{{ $participant->phone }}</td>
-                <td>
-                    <button class="btn btn-primary btn-sm view-attempts" data-name="{{ $participant->name }}"
-                        data-video="{{ $participant->drive_video_file_id }}"
-                        data-image="{{ $participant->drive_image_file_id }}">
-                        View Attempts
-                    </button>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
-<!-- Admin-style Modal -->
-<div class="modal fade" id="attemptsModal" tabindex="-1" aria-labelledby="attemptsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="attemptsModalLabel">Attempts</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <!-- Left column: Image -->
-                    <div class="col-md-6 mb-3">
-                        <iframe id="attemptsImage" class="fullscreen-iframe-wrapper"
-                            style="width:100%; height:400px; border:none;"></iframe>
-                    </div>
-
-                    <!-- Right column: Video -->
-                    <div class="col-md-6 mb-3">
-                        <iframe id="attemptsVideo" class="fullscreen-iframe-wrapper"
-                            style="width:100%; height:400px; border:none;" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#datatable-json').DataTable({
-            responsive: true,
-            paging: true,
-            pageLength: 25,
-            lengthMenu: [5, 10, 25, 50],
-            searching: true,
-            ordering: true,
-            info: true,
-            language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search attempts..."
-            }
-        });
-
-        // Handle View Attempts button click
-        $('.view-attempts').click(function () {
-            var modalEl = document.getElementById('attemptsModal');
-            var modal = new bootstrap.Modal(modalEl);
-
-            var name = $(this).data('name');
-            var imageId = $(this).data('image');
-            var videoId = $(this).data('video');
-
-            $('#attemptsModalLabel').text(name + ' - Attempts');
-
-            // Set Image iframe
-            if (imageId) {
-                $('#attemptsImage')
-                    .attr('src', 'https://drive.google.com/file/d/' + imageId + '/preview')
-                    .css({
-                        'width': '100%',   // Customize image width
-                        'height': '600px', // Customize image height
-                    });
-            } else {
-                $('#attemptsImage').attr('src', '').css({ 'width': '', 'height': '' });
-            }
-
-            // Set Video iframe
-            if (videoId) {
-                $('#attemptsVideo')
-                    .attr('src', 'https://drive.google.com/file/d/' + videoId + '/preview')
-                    .css({
-                        'width': '100%',   // Customize video width
-                        'height': '600px', // Customize video height
-                    });
-            } else {
-                $('#attemptsVideo').attr('src', '').css({ 'width': '', 'height': '' });
-            }
-
-            modal.show();
-        });
-
-        // Clear modal content on close
-        $('#attemptsModal').on('hidden.bs.modal', function () {
-            $('#attemptsImage, #attemptsVideo').attr('src', '').css({ 'width': '', 'height': '' });
-        });
-
-    });
-</script>
-
-@endsection --}}
-
-
-
 @extends('layouts.web')
 
-@section('title', 'Home | Clear Men Guinness World Records')
-
 @section('content')
+<div class="participant-container">
 
-{{-- CSS --}}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    @if($participant)
+        <div class="participant-card-bg">
+            <!-- Drive Image as iframe background -->
+            <iframe 
+                src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview" 
+                frameborder="0" 
+                allowfullscreen
+                class="participant-bg-iframe"></iframe>
 
-<style>
-    /* Responsive Modal Iframe */
-    #attemptsImage, #attemptsVideo {
-        width: 100%;
-        height: 500px;
-        border: none;
-        border-radius: 8px;
-    }
-
-    /* Mobile Size */
-    @media (max-width: 768px) {
-        #attemptsImage, #attemptsVideo {
-            height: 300px;
-        }
-    }
-
-    /* Table scroll on mobile */
-    .dataTables_wrapper .dataTables_scroll {
-        overflow-x: auto;
-    }
-</style>
-
-<div class="container py-4">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1 class="display-6 fw-bold">Official Attempts List</h1>
-            <p class="text-muted mb-4">Search participants and view their recorded attempts.</p>
-        </div>
-    </div>
-</div>
-
-<div class="p-3">
-    <div class="table-responsive">
-        <table id="datatable-json" class="table table-striped table-bordered w-100">
-            <thead>
-                <tr>
-                    <th>Serial Number</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Location</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="attemptsModal" tabindex="-1" aria-labelledby="attemptsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-sm-down">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="attemptsModalLabel">Attempts</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-                <div class="row">
-
-                    {{-- Image --}}
-                    <div class="col-md-6 col-sm-12 mb-3">
-                        <iframe id="attemptsImage"></iframe>
-                    </div>
-
-                    {{-- Video --}}
-                    <div class="col-md-6 col-sm-12 mb-3">
-                        <iframe id="attemptsVideo" allowfullscreen></iframe>
-                    </div>
-
+            <!-- Overlay with info -->
+            <div class="participant-overlay">
+                <h1 class="participant-name">{{ $participant->name }}</h1>
+                <p class="participant-info">Phone: {{ $participant->phone }} <br/> Email: {{ $participant->email }}</p>
+                <div class="participant-button-wrapper">
+                    <button class="participant-btn-outline" data-bs-toggle="modal" data-bs-target="#participantMediaModal">
+                        View Media
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="participantMediaModal" tabindex="-1" aria-labelledby="participantMediaModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="participantMediaModalLabel">{{ $participant->name }} Media</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <!-- Image iframe -->
+                        <div class="ratio ratio-16x9 mb-3">
+                            <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview" allowfullscreen frameborder="0"></iframe>
+                        </div>
+                        <hr>
+                        <!-- Video iframe -->
+                        <div class="participant-video-ratio ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview" allowfullscreen frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    @else
+        <div class="participant-alert alert alert-warning text-center p-4 rounded-4 shadow-sm">
+            <h4>No Participant Data Found</h4>
+            <p>Your phone number is not matched with any participant record.</p>
+        </div>
+    @endif
+
 </div>
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-{{-- JS --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+body {
+    font-family: 'Lato', sans-serif;
+}
 
-<script>
-    $(document).ready(function() {
+.participant-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-        // FAST SERVER-SIDE DATATABLE
-        $('#datatable-json').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('participants.json') }}",
-            columns: [
-                { data: 'video_chain_serial', name: 'video_chain_serial' },
-                { data: 'name', name: 'name' },
-                { data: 'email', name: 'email' },
-                { data: 'location', name: 'location' },
-                { data: 'action', name: 'action', orderable: false, searchable: false }
-            ],
-            pageLength: 25,
-            responsive: true,
-            language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search participants..."
-            }
-        });
+.participant-card-bg {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 700px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
 
-        // Modal handler
-        $(document).on('click', '.view-attempts', function() {
-            let name = $(this).data('name');
-            let imageId = $(this).data('image');
-            let videoId = $(this).data('video');
+.participant-card-bg:hover {
+    transform: scale(1.05);
+}
 
-            $('#attemptsModalLabel').text(name + " - Attempts");
+/* Iframe as background */
+.participant-bg-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* so overlay buttons work */
+}
 
-            // Image
-            // Image
-            $('#attemptsImage')
-                .attr('src', imageId ? `https://drive.google.com/file/d/${imageId}/preview` : '')
-                .css({
-                    width: '100%',
-                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '700px',
-                    border: 'none',
-                    'border-radius': '8px'
-                });
+/* Overlay info */
+.participant-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(17, 25, 40, 0.6);
+    color: #fff;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+    text-align: center;
+    z-index: 2;
+}
 
-            // Video
-            $('#attemptsVideo')
-                .attr('src', videoId ? `https://drive.google.com/file/d/${videoId}/preview` : '')
-                .css({
-                    width: '100%',
-                    height: window.matchMedia('(max-width: 768px)').matches ? '300px' : '700px',
-                    border: 'none',
-                    'border-radius': '8px'
-                })
-                .attr('allowfullscreen', videoId ? true : null);
+.participant-name {
+    font-family: 'Righteous', cursive;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
 
-            new bootstrap.Modal('#attemptsModal').show();
-        });
+.participant-info {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
 
-        // Clear modal content on close
-        $('#attemptsModal').on('hidden.bs.modal', function() {
-            $('#attemptsImage, #attemptsVideo').attr('src', '');
-        });
+.participant-button-wrapper .participant-btn-outline {
+    border-radius: 24px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: 1px solid #00d4ff;
+    background: transparent;
+    color: #00d4ff;
+    transition: all 0.3s ease;
+}
 
-    });
-</script>
+.participant-button-wrapper .participant-btn-outline:hover {
+    background: #00d4ff;
+    color: #fff;
+    transform: scale(1.1);
+}
 
+/* Modal styles */
+.participant-video-ratio iframe {
+    border-radius: 12px;
+}
+
+.participant-alert {
+    width: 100%;
+    max-width: 500px;
+}
+</style>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

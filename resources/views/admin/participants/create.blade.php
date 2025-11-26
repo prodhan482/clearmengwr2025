@@ -92,36 +92,8 @@
         input:checked~.toggle-icon {
             color: #28a745;
         }
-    </style>
-@endsection
-
-@section('content')
-    <div class="container-fluid px-lg-4">
-        <div class="row">
-            <div class="col-md-12 mt-lg-4 mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h2 mb-0 text-gray-800 text-info font-weight-bold">Upload Participants CSV/Excel</h1>
-                            <a href="{{ route('participants.index') }}"
-                                class="d-none d-sm-inline-block btn-sm btn-danger shadow-sm">
-                                <i class="fa fa-backward mr-2"></i>Back
-                            </a>
-                        </div>
-
-                        {!! Form::open(['route' => 'participants.import', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-
-                        {{-- Stylish Active Toggle --}}
-                        <div class="form-group mt-3">
-                            <label>Activation</label>
-                            <label class="toggle-wrapper">
-                                <input type="checkbox" name="is_active" id="is_active" checked>
-                                <span class="toggle-switch"></span>
-                                <i class="fas fa-check-circle toggle-icon" id="toggleIcon"></i>
-                            </label>
-                        </div>
-
-                        {{-- Drag & Drop File Upload --}}
+ @endsectionel@section('content')
+    <div class="container-fluid px-lg-4">d        <div class="row">w            <div class="col-md-12 mt-lg-4 mt-4">                 <div class="card">                     <div class="card-body">d                        <div class="d-sm-flex align-items-center justify-content-between mb-4">l                            <h1 class="h2 mb-0 text-gray-800 text-info font-weight-bold">Upload Participants CSV/Excel</h1>                             <a href="{{ route('participants.index') }}"                                 class="d-none d-sm-inline-block btn-sm btn-danger shadow-sm">t                                <i class="fa fa-backward mr-2"></i>Back                             </a>a                        </div>                          {!! Form::open(['route' => 'participants.import', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!} :                        {{-- Stylish Active Toggle --}}i                        <div class="form-group mt-3">n                            <label>Activation</label>c                            <label class="toggle-wrapper">-                                <input type="checkbox" name="is_active" id="is_active" checked>g                                <span class="toggle-switch"></span>o                                <i class="fas fa-check-circle toggle-icon" id="toggleIcon"></i>o                            </label>                         </div>                          {{-- Drag & Drop File Upload --}}                         <div class="form-group">                      {{-- Drag & Drop File Upload --}}
                         <div class="form-group">
                             <label>Upload CSV / Excel File <small class="text-muted">(Max 10k records)</small></label>
                             <div class="upload-area" id="uploadArea">

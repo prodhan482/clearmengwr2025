@@ -12,10 +12,16 @@ class Participant extends Model
         'camera_no',
         'name',
         'email',
+        'phone',
         'drive_video_file_id',
         'drive_image_file_id',
         'image_library_file_no',
         'video_library_file_no',
         'video_chain_serial',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'phone', 'phone');
+    }
 }

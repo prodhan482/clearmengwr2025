@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\ParticipantsImport;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -70,6 +71,19 @@ class ParticipantController extends Controller
             ->make(true);
     }
 
+    public function participantsDashboard()
+    {
+        $user = Auth::user();
+
+        // Match phone number in participants table
+        $participant = Participant::where('phone', $user->phone)
+            ->select('name', 'phone', 'email', 'drive_video_file_id', 'drive_image_file_id')
+            ->first();
+            // dd($participant);
+
+        return view('web.participants.dashboard', compact('participant'));
+    }
+
     public function create()
     {
         return view('admin.participants.create');
@@ -104,6 +118,7 @@ class ParticipantController extends Controller
             'camera_no' => 'nullable|string|max:50',
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|email',
+            'phone' => 'nullable|string',
             'drive_video_file_id' => 'nullable|string',
             'drive_image_file_id' => 'nullable|string',
             'image_library_file_no' => 'nullable|string',
@@ -137,6 +152,7 @@ class ParticipantController extends Controller
             'camera_no' => 'nullable|string|max:50',
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|email',
+            'phone' => 'nullable|string',
             'drive_video_file_id' => 'nullable|string',
             'drive_image_file_id' => 'nullable|string',
             'image_library_file_no' => 'nullable|string',

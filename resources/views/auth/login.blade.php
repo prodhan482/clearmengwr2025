@@ -24,44 +24,7 @@
         /* ✅ Fix Safari stacking/z-index bug */
     }
 
-    /* ---------- Background Circles ---------- */
-    .circles {
-        width: 400px;
-        height: 400px;
-        margin: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 0;
-        pointer-events: none;
-        /* ✅ Never block clicks */
-    }
 
-    /* .circle1 {
-        width: 300px;
-        height: 300px;
-        background: linear-gradient(45deg, #7effe5, #019678);
-        border-radius: 50%;
-        position: absolute;
-        top: -100px;
-        right: -155px;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .circle2 {
-        width: 200px;
-        height: 200px;
-        background: linear-gradient(45deg, #23f8cd, #5bc1ac);
-        border-radius: 50%;
-        position: absolute;
-        bottom: -90px;
-        left: -70px;
-        z-index: 0;
-        pointer-events: none;
-    } */
 
     /* ---------- Login Form Card ---------- */
     .login_form {
@@ -94,7 +57,7 @@
     .login_form input {
         background: transparent;
         color: #000000;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 6px;
         padding: 14px 16px;
         margin-bottom: 30px;
@@ -116,28 +79,7 @@
         font-weight: bold;
     }
 
-    /* ---------- Home Button ---------- */
-    .home-button {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(10px);
-        padding: 8px;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        z-index: 20;
-    }
 
-    .home-button:hover {
-        transform: scale(1.1);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .home-button svg {
-        display: block;
-        stroke: #333;
-    }
 
     /* ---------- Tablet View ---------- */
     @media (max-width: 768px) {
@@ -219,11 +161,12 @@
             <h1>Login Here</h1>
             <p>Access the Guinness World Record Clear Men Attempts List</p>
 
-            <input type="email" name="email" placeholder="Email address" value="{{ old('email') }}" required>
+            <input type="text" name="login" placeholder="Phone" value="{{ old('login') }}" required>
             <input type="password" name="password" placeholder="Password" required>
 
             <button class="nav-link custom-btn custom-border-btn btn" type="submit">Login</button>
         </form>
+
     </section>
 
     {{-- SweetAlert2 CDN --}}

@@ -78,6 +78,18 @@
                                 {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) !!}
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong>Phone Number (Bangladesh):</strong>
+                                {!! Form::tel('phone', null, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'e.g. 01XXXXXXXXX or +8801XXXXXXXXX',
+                                    'pattern' => '^(\+?88)?01[3-9][0-9]{8}$',
+                                    'title' => 'Enter a Bangladeshi mobile number. Accepts 01XXXXXXXXX or +8801XXXXXXXXX formats.',
+                                    'maxlength' => 14
+                                ]) !!}
+                            </div>
+                        </div>
 
                         {{-- Drive Image File ID --}}
                         <div class="col-md-6">
