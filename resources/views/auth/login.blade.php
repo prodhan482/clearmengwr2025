@@ -39,7 +39,7 @@
         /* ✅ Never block clicks */
     }
 
-    .circle1 {
+    /* .circle1 {
         width: 300px;
         height: 300px;
         background: linear-gradient(45deg, #7effe5, #019678);
@@ -61,7 +61,7 @@
         left: -70px;
         z-index: 0;
         pointer-events: none;
-    }
+    } */
 
     /* ---------- Login Form Card ---------- */
     .login_form {
@@ -106,8 +106,8 @@
     }
 
     .login_form button {
-        background: linear-gradient(45deg, #99f7e4, #0cf8c9);
-        color: #03080e;
+        background: #002C4D;
+        color: #ffffff;
         border: none;
         border-radius: 6px;
         padding: 14px 16px;
@@ -152,7 +152,7 @@
             padding: 30px 20px;
         }
 
-        .circle1 {
+        /* .circle1 {
             width: 220px;
             height: 220px;
             top: -90px;
@@ -164,7 +164,7 @@
             height: 150px;
             bottom: -70px;
             left: -50px;
-        }
+        } */
     }
 
     /* ---------- Mobile Small ---------- */
@@ -188,7 +188,7 @@
             padding: 6px 10px;
         }
 
-        .circle1 {
+        /* .circle1 {
             width: 180px;
             height: 180px;
         }
@@ -196,7 +196,7 @@
         .circle2 {
             width: 120px;
             height: 120px;
-        }
+        } */
     }
 </style>
 
@@ -208,10 +208,10 @@
 @section('content')
 
     <section class="loginsection">
-        <div class="circles">
+        {{-- <div class="circles">
             <div class="circle1"></div>
             <div class="circle2"></div>
-        </div>
+        </div> --}}
 
         <form action="{{ route('login') }}" method="POST" class="login_form">
             @csrf
@@ -222,7 +222,7 @@
             <input type="email" name="email" placeholder="Email address" value="{{ old('email') }}" required>
             <input type="password" name="password" placeholder="Password" required>
 
-            <button type="submit">Login</button>
+            <button class="nav-link custom-btn custom-border-btn btn" type="submit">Login</button>
         </form>
     </section>
 

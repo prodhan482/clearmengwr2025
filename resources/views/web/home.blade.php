@@ -51,56 +51,111 @@
 
 
 
-    @guest
-        <section class="cta-section section-padding section-bg">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
 
-                    <div class="col-lg-6 col-12 ms-auto">
-                        <h2 class="mb-0" style="font-size: 30px;">
-                            Register Below👇 to watch the attempts
-                        </h2>
-
-
-
-                    </div>
-
-                    <div class="col-lg-5 col-12">
-                        <a href="/login" class="me-4">Already a member?</a>
-
-                        <a href="/login" class="custom-btn btn smoothscroll">Login here</a>
-                    </div>
-
+    <section class="section-padding" id="section_3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-4">
+                    <h2>OFFICIAL ATTEMPTS</h2>
                 </div>
             </div>
-        </section>
+
+            <div class="row g-4">
+                @foreach($participants as $participant)
+                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                        <div class="custom-block-wrap position-relative viewPreview" style="cursor:pointer;"
+                            data-id="{{ $participant->drive_video_file_id }}" data-name="{{ $participant->name ?? 'Name' }}"
+                            data-type="Video">
+
+                            <!-- Video Thumbnail with Zoom -->
+                            <div class="video-wrapper"
+                                style="position: relative; padding-bottom: 100%; overflow: hidden; border-radius: 10px;">
+                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview"
+                                    class="video-thumbnail"
+                                    style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0; transform: scale(1.3); object-fit: cover;"
+                                    allowfullscreen>
+                                </iframe>
+
+                                <!-- Hover Play Icon -->
+                                <div class="hover-play-icon d-flex justify-content-center align-items-center">
+                                    <i class="fas fa-play-circle" style="font-size: 60px; color: rgba(255,255,255,0.8);"></i>
+                                </div>
+                            </div>
+
+                            <div class="custom-block mt-2 text-center">
+                                <a href="javascript:void(0);" class="custom-btn btn">{{ $participant->name ?? 'Name' }}</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Show More Button -->
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <a href="/user-dashboard">
+                        <button class="btn btn-primary custom-btn"><i class="fas fa-arrow-right me-2"></i>Register or Login
+                            to View more</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    {{-- Welcome Card Disable --}}
+
+    {{-- @guest
+    <section class="cta-section section-padding section-bg">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+
+                <div class="col-lg-6 col-12 ms-auto">
+                    <h2 class="mb-0" style="font-size: 30px;">
+                        Register Below👇 to watch the attempts
+                    </h2>
+
+
+
+                </div>
+
+                <div class="col-lg-5 col-12">
+                    <a href="/login" class="me-4">Already a member?</a>
+
+                    <a href="/login" class="custom-btn btn smoothscroll">Login here</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
     @endguest
 
 
     @auth
-        <section class="cta-section section-padding section-bg">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
+    <section class="cta-section section-padding section-bg">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
 
-                    <div class="col-lg-6 col-12 ms-auto">
-                        <h2 class="mb-0" style="font-size: 30px;">
-                            Hii , {{ Auth::user()->name }}!
-                        </h2>
-                    </div>
-
-                    <div class="col-lg-5 col-12">
-                        <h2 style="font-size: 30px">Click here to view all attempts.</h2>
-
-                        <a href="{{'/user-dashboard'}}" class="custom-btn btn smoothscroll">
-                            G<i class="fas fa-thin fa-futbol" style="animation: bounce 1s infinite;"></i>
-                        </a>
-                    </div>
-
+                <div class="col-lg-6 col-12 ms-auto">
+                    <h2 class="mb-0" style="font-size: 30px;">
+                        Hii , {{ Auth::user()->name }}!
+                    </h2>
                 </div>
-            </div>
-        </section>
 
-    @endauth
+                <div class="col-lg-5 col-12">
+                    <h2 style="font-size: 30px">Click here to view all attempts.</h2>
+
+                    <a href="{{'/user-dashboard'}}" class="custom-btn btn smoothscroll">
+                        G<i class="fas fa-thin fa-futbol" style="animation: bounce 1s infinite;"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    @endauth --}}
 
 
 
@@ -114,7 +169,7 @@
                     <div class="col-lg-10 col-12">
                         <h2 class="text-white mb-4">Register Here</h2>
 
-                        <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST"
+                        {{-- <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST"
                             role="form">
                             @csrf
 
@@ -132,7 +187,40 @@
                                 class="form-control mb-3" placeholder="Confirm Password" minlength="4" required>
 
                             <button type="submit" class="form-control">Submit</button>
+                        </form> --}}
+
+                        <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST"
+                            role="form">
+                            @csrf
+
+                            <!-- Full Name -->
+                            <label for="full-name" class="text-black mb-1">Full Name *</label>
+                            <input type="text" name="name" id="full-name" class="form-control mb-3"
+                                placeholder="Enter your full name" value="{{ old('name') }}" required>
+
+                            <!-- Phone (Required) -->
+                            <label for="phone" class="text-black mb-1">Phone Number (Bangladesh) *</label>
+                            <input type="text" name="phone" id="phone" class="form-control mb-3" placeholder="01XXXXXXXXX"
+                                value="{{ old('phone') }}" required>
+
+                            <!-- Email (Optional) -->
+                            {{-- <label for="email" class="text-black mb-1">Email Address (Optional)</label>
+                            <input type="email" name="email" id="email" class="form-control mb-3"
+                                placeholder="example@email.com" value="{{ old('email') }}"> --}}
+
+                            <!-- Password -->
+                            <label for="password" class="text-black mb-1">Password *</label>
+                            <input type="password" name="password" id="password" class="form-control mb-3"
+                                placeholder="Password (min 4 characters)" minlength="4" required>
+
+                            <!-- Confirm Password -->
+                            <label for="password_confirmation" class="text-black mb-1">Confirm Password *</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="form-control mb-3" placeholder="Confirm Password" minlength="4" required>
+
+                            <button type="submit" class="form-control mt-2">Submit</button>
                         </form>
+
 
                     </div>
 
@@ -297,59 +385,13 @@
 
 
     <!-- Bootstrap 5 CSS -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+    {{--
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 
     <!-- Font Awesome for Play Icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <section class="section-padding" id="section_3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center mb-4">
-                    <h2>OFFICIAL ATTEMPTS</h2>
-                </div>
-            </div>
 
-            <div class="row g-4">
-                @foreach($participants as $participant)
-                    <div class="col-lg-4 col-md-6 col-12 mb-4">
-                        <div class="custom-block-wrap position-relative viewPreview" style="cursor:pointer;"
-                            data-id="{{ $participant->drive_video_file_id }}" data-name="{{ $participant->name ?? 'Name' }}"
-                            data-type="Video">
-
-                            <!-- Video Thumbnail with Zoom -->
-                            <div class="video-wrapper"
-                                style="position: relative; padding-bottom: 100%; overflow: hidden; border-radius: 10px;">
-                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview"
-                                    class="video-thumbnail"
-                                    style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0; transform: scale(1.3); object-fit: cover;"
-                                    allowfullscreen>
-                                </iframe>
-
-                                <!-- Hover Play Icon -->
-                                <div class="hover-play-icon d-flex justify-content-center align-items-center">
-                                    <i class="fas fa-play-circle" style="font-size: 60px; color: rgba(255,255,255,0.8);"></i>
-                                </div>
-                            </div>
-
-                            <div class="custom-block mt-2 text-center">
-                                <a href="javascript:void(0);" class="custom-btn btn">{{ $participant->name ?? 'Name' }}</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- Show More Button -->
-            <div class="row mt-4">
-                <div class="col-12 text-center">
-                    <a href="/user-dashboard">
-                        <button class="btn btn-primary custom-btn">Show More</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Bootstrap 5 Modal -->
     <div class="modal fade" id="previewModal" tabindex="-1">
@@ -387,14 +429,14 @@
             opacity: 1;
         }
 
-        /* Optional: smooth zoom on hover */
+        /* Video thumbnail zoom */
         .video-thumbnail {
             transition: transform 0.3s ease;
+            transform: scale(1.5) !important;
         }
 
         .custom-block-wrap:hover .video-thumbnail {
-            transform: scale(1.35);
-            /* zoom more on hover */
+            transform: scale(2);
         }
     </style>
 

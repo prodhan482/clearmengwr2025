@@ -46,23 +46,23 @@
                     style="
                         display: block;
                         margin: 0 auto;
-                        width: 80%;
-                        max-width: 80%;
-                        height: 80%;
+                        width: 60%;
+                        max-width: 60%;
+                        height: 60%;
                         object-fit: contain;
                         user-select: none;
                         pointer-events: none;
                         padding-top: 5%;
                      ">
                 <!-- New Text Under Logo -->
-                <p style="color: #ccc; font-size: 18px; margin-top: 10px;">
+                <p style="color: #ccc; font-size: 12px; margin-top: 10px;">
                     <b>MOST PEOPLE IN AN ONLINE VIDEO CHAIN PASSING A FOOTBALL (SOCCER BALL)</b>
                 </p>
             </div>
         </div>
 
         <!-- Partners Logos Section -->
-        <div class="row" style="margin-top: 30px; justify-content: center; align-items: center;">
+        <div class="row" style="margin-top: 5px; justify-content: center; align-items: center;">
             <div class="col-6 col-sm-4 col-md-2 mb-3">
                 <img src="assets/images/hvlwhite.png" alt="Partner 1"
                     style="width: 100%; max-width: 120px; object-fit: contain;">
@@ -78,6 +78,19 @@
             <!-- Add more partners as needed -->
         </div>
     </div>
+    <div class="col-md-10 d-flex justify-content-end align-items-center social-icon">
+        <a href="https://www.facebook.com/share/17phjBhsR7/" target="_blank" class="me-3">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/clearmen_bd/?utm_source=ig_web_button_share_sheet" target="_blank"
+            class="me-3">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/discover/clear-men?lang=en" target="_blank">
+            <i class="fab fa-tiktok"></i>
+        </a>
+    </div>
+
 
     <div class="site-footer-bottom"
         style="background-color: #0c0a0a; color: #fff; padding: 10px 0; text-align: center;">
@@ -94,3 +107,17 @@
         </div>
     </div>
 </footer>
+
+<style>
+    .social-icon i {
+        font-size: 20px;
+        color: #ffffff;
+        transition: 0.3s ease;
+
+    }
+
+    .social-icon i:hover {
+        transform: scale(1.2);
+        color: #065daf;
+    }
+</style>

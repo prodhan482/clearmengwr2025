@@ -1,27 +1,22 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="assets/images/logo.png" class="logo img-fluid" alt="ClearmenGWR">
-            <span>
+            <span style="color:#002C4D !important;">
                 Clear Men Guinness World Record
-                <small style="justify-content: center;">OFFICIAL ATTEMPT</small>
             </span>
 
-            <p style="color: #030453; font-size: 4px; margin: 5px 0 0 0;">
+            <p style="color: #002C4D; font-size: 4px; margin: 5px 0 0 0;">
                 <b>PEOPLE IN AN ONLINE VIDEO CHAIN<br> PASSING A FOOTBALL (SOCCER BALL)</b>
             </p>
         </a>
-
-        {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> --}}
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
 
                 @guest
-                    <!-- Show Home/Register/Login if not logged in -->
                     <li class="nav-item">
                         @if(Request::is('/'))
                             <a class="nav-link click-scroll" href="{{ '/' }}">Home</a>
@@ -31,13 +26,11 @@
                     </li>
 
                     <li class="nav-item">
-
                         @if(Request::is('/'))
                             <a class="nav-link click-scroll" href="#section_4">Register</a>
                         @else
                             <a class="nav-link" href="{{'/#section_4'}}">Register</a>
                         @endif
-
                     </li>
 
                     <li class="nav-item ms-3">
@@ -46,7 +39,6 @@
                 @endguest
 
                 @auth
-                    <!-- Show username and logout if logged in -->
                     <li class="nav-item">
                         <span class="nav-link">{{ Auth::user()->name }}</span>
                     </li>
@@ -55,24 +47,27 @@
                             <a class="nav-link" href="{{ '/user-dashboard' }}">Participants List</a>
                         </li>
                     @endif
-                    {{-- @can('super-admin')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{'/dashbaord'}}">Dashboard</a>
-                    </li>
-                    @endcan --}}
 
-                    <li class="nav-item ms-3">
+                    <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="custom-btn btn smoothscroll" type="submit"
-                                style="border:rgb(0, 98, 190);">Logout</button>
+                            <button class="logout-btn" type="submit">Logout</button>
                         </form>
                     </li>
-
-
-
-
                 @endauth
+
+                <!-- 🔥 Social Icons (Right Side) -->
+                {{-- <li class="d-flex justify-content-end align-items-center ms-3 social-icons">
+                    <a href="https://facebook.com" target="_blank" class="me-3">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="me-3">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </li> --}}
 
             </ul>
         </div>
@@ -80,11 +75,7 @@
 </nav>
 
 
-
-
-
-
-<style>
+{{-- <style>
     .nav-custom-btn {
         font-weight: 500;
         color: #065daf !important;
@@ -94,14 +85,21 @@
         white-space: nowrap;
     }
 
-    @media (max-width: 992px) {
+    .social-icons i {
+        font-size: 16px;
+        color: #002C4D;
+        transition: 0.3s ease;
+    }
 
-        /* Tablet */
+    .social-icons i:hover {
+        transform: scale(1.2);
+        color: #065daf;
+    }
+
+    @media (max-width: 992px) {
         .navbar-brand span {
             font-size: 14px;
         }
-
-
 
         .navbar-brand small {
             font-size: 11px !important;
@@ -118,13 +116,10 @@
     }
 
     @media (max-width: 576px) {
-
-        /* Mobile */
         .navbar-brand img {
             width: 40%;
             max-width: 40px;
             padding-top: 8%;
-
         }
 
         .navbar-brand span {
@@ -149,4 +144,4 @@
             padding: 6px 8px;
         }
     }
-</style>
+</style> --}}
