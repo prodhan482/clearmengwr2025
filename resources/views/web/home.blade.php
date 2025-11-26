@@ -169,57 +169,39 @@
                     <div class="col-lg-10 col-12">
                         <h2 class="text-white mb-4">Register Here</h2>
 
-                        {{-- <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST"
-                            role="form">
-                            @csrf
-
-                            <!-- Inputs -->
-                            <input type="text" name="name" id="full-name" class="form-control mb-3" placeholder="Full Name"
-                                value="{{ old('name') }}" required>
-
-                            <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Email address"
-                                value="{{ old('email') }}" required>
-
-                            <input type="password" name="password" id="password" class="form-control mb-3"
-                                placeholder="Password (min 4 characters)" minlength="4" required>
-
-                            <input type="password" name="password_confirmation" id="password_confirmation"
-                                class="form-control mb-3" placeholder="Confirm Password" minlength="4" required>
-
-                            <button type="submit" class="form-control">Submit</button>
-                        </form> --}}
-
                         <form class="custom-form volunteer-form" action="{{ route('register.create') }}" method="POST"
                             role="form">
                             @csrf
 
-                            <!-- Full Name -->
-                            <label for="full-name" class="text-black mb-1">Full Name *</label>
-                            <input type="text" name="name" id="full-name" class="form-control mb-3"
-                                placeholder="Enter your full name" value="{{ old('name') }}" required>
+                            <!-- Inputs -->
+                            <div class="mb-3">
+                                <label for="full-name" class="form-label">Full Name</label>
+                                <input type="text" name="name" id="full-name" class="form-control" placeholder="Full Name"
+                                    value="{{ old('name') }}" required>
+                            </div>
 
-                            <!-- Phone (Required) -->
-                            <label for="phone" class="text-black mb-1">Phone Number (Bangladesh) *</label>
-                            <input type="text" name="phone" id="phone" class="form-control mb-3" placeholder="01XXXXXXXXX"
-                                value="{{ old('phone') }}" required>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email address"
+                                    value="{{ old('email') }}" required>
+                            </div>
 
-                            <!-- Email (Optional) -->
-                            {{-- <label for="email" class="text-black mb-1">Email Address (Optional)</label>
-                            <input type="email" name="email" id="email" class="form-control mb-3"
-                                placeholder="example@email.com" value="{{ old('email') }}"> --}}
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password (min 4 characters)</label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    placeholder="Password (min 4 characters)" minlength="4" required>
+                            </div>
 
-                            <!-- Password -->
-                            <label for="password" class="text-black mb-1">Password *</label>
-                            <input type="password" name="password" id="password" class="form-control mb-3"
-                                placeholder="Password (min 4 characters)" minlength="4" required>
+                            <div class="mb-3">
+                                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                    class="form-control" placeholder="Confirm Password" minlength="4" required>
+                            </div>
 
-                            <!-- Confirm Password -->
-                            <label for="password_confirmation" class="text-black mb-1">Confirm Password *</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation"
-                                class="form-control mb-3" placeholder="Confirm Password" minlength="4" required>
-
-                            <button type="submit" class="form-control mt-2">Submit</button>
+                            <button type="submit" class="form-control">Submit</button>
                         </form>
+
+                     
 
 
                     </div>
