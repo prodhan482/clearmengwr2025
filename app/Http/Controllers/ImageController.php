@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
@@ -19,9 +20,11 @@ class ImageController extends Controller
             ->get();
 
         // Add your participants videos (8 videos) sorted by video chain serial
-        $participants = Participant::whereNotNull('drive_video_file_id')
-            ->orderBy('video_chain_serial', 'asc')
-            ->take(9)
+        $participants = DB::table('participants')
+            ->whereNotNull('drive_video_file_id')
+            ->select('id', 'name', 'drive_video_file_id', 'drive_image_file_id')
+            ->inRandomOrder()
+            ->limit(9)
             ->get();
 
         // return both variables to the same view

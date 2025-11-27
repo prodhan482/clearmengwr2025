@@ -1,155 +1,272 @@
 @extends('layouts.web')
 
 @section('content')
-<div class="participant-container">
+
 
     @if($participant)
-        <div class="participant-card-bg">
-            <!-- Drive Image as iframe background -->
-            <iframe 
-                src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview" 
-                frameborder="0" 
-                allowfullscreen
-                class="participant-bg-iframe"></iframe>
+        <section class="section-padding" id="section_3">
 
-            <!-- Overlay with info -->
-            <div class="participant-overlay">
-                <h1 class="participant-name">{{ $participant->name }}</h1>
-                <p class="participant-info">Phone: {{ $participant->phone }} <br/> Email: {{ $participant->email }}</p>
-                <div class="participant-button-wrapper">
-                    <button class="participant-btn-outline" data-bs-toggle="modal" data-bs-target="#participantMediaModal">
-                        View Media
-                    </button>
+            {{-- ================== MATCHED VIEW ================== --}}
+            <div class="participantcontainer">
+
+
+                <!-- Welcome Section -->
+                <div class="welcome-box">
+                    <h3>🎉 Congratulations, {{ $participant->name }}!</h3>
+                    <p>Thank you for participating in the <strong>Clear Men Guinness World Records Official Attempt</strong>.
+                    </p>
                 </div>
-            </div>
-        </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="participantMediaModal" tabindex="-1" aria-labelledby="participantMediaModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="participantMediaModalLabel">{{ $participant->name }} Media</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <!-- Image iframe -->
-                        <div class="ratio ratio-16x9 mb-3">
-                            <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview" allowfullscreen frameborder="0"></iframe>
-                        </div>
-                        <hr>
-                        <!-- Video iframe -->
-                        <div class="participant-video-ratio ratio ratio-16x9">
-                            <iframe src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview" allowfullscreen frameborder="0"></iframe>
+                <!-- Matched Participant Card -->
+                <div class="participant-card-bg view-attempts" data-name="{{ $participant->name }}"
+                    data-image="{{ $participant->drive_image_file_id }}" data-video="{{ $participant->drive_video_file_id }}">
+
+                    <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview?rm=minimal"
+                        class="participant-bg-iframe" frameborder="0"></iframe>
+
+                    <div class="play-icon">▶</div>
+
+                    <div class="participant-overlay">
+                        <h1 class="participant-name">{{ $participant->name }}</h1>
+                        <p class="participant-info text-white">
+                            Phone: {{ $participant->phone }} <br>
+                            Email: {{ $participant->email }}
+                        </p>
+
+                        <div class="participant-button-wrapper">
+                            <a href="https://docs.google.com/forms/d/18NWtKOTJbH8zbqUo8OFHNTiJBW5eTfHhRJn2u-abcde/viewform"
+                                target="_blank" class="participant-btn-outline">
+                                Fill the Form
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
     @else
-        <div class="participant-alert alert alert-warning text-center p-4 rounded-4 shadow-sm">
-            <h4>No Participant Data Found</h4>
-            <p>Your phone number is not matched with any participant record.</p>
-        </div>
+
+        {{-- ================== UNMATCHED VIEW ================== --}}
+        <section class="section-padding" id="section_3">
+            <div class="usercontainer">
+                <div class="row">
+                    <div class="col-lg-12 text-center mb-4">
+                        <h3>WELCOME TO<strong style="color: #031038;"> CLEAR MEN GUINNESS WORLD RECORD OFFICIAL
+                                ATTEMPTS</strong></h3>
+                        <p class="mt-2">Here are some official attempt videos you can watch:</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    @foreach($participants as $p)
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="custom-block-wrap position-relative view-attempts" data-name="{{ $p->name }}"
+                                data-image="{{ $p->drive_image_file_id ?? '' }}" data-video="{{ $p->drive_video_file_id ?? '' }}">
+
+                                <div class="video-wrapper"
+                                    style="position:relative; padding-bottom:100%;overflow:hidden;border-radius:10px;">
+                                    <iframe src="https://drive.google.com/file/d/{{ $p->drive_image_file_id ?? '' }}/preview"
+                                        class="video-thumbnail"
+                                        style="position:absolute;top:0;left:-10px;width:100%;height:100%;transform:scale(1.4);border:0;"
+                                        allowfullscreen></iframe>
+
+                                    <div class="hover-play-icon d-flex justify-content-center align-items-center">
+                                        <i class="fas fa-play-circle" style="font-size: 60px; color: rgba(255,255,255,0.8);"></i>
+                                    </div>
+                                </div>
+
+                                <div class="custom-block mt-2 text-center">
+                                    <a href="javascript:void(0);" class="custom-btn btn">{{ $p->name }}</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+
     @endif
 
-</div>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-body {
-    font-family: 'Lato', sans-serif;
-}
 
-.participant-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
+    
+    @include('web.participants.attempts-modal')
 
-.participant-card-bg {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    height: 700px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
 
-.participant-card-bg:hover {
-    transform: scale(1.05);
-}
+    {{-- ====================== STYLES ====================== --}}
+    <style>
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 
-/* Iframe as background */
-.participant-bg-iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* so overlay buttons work */
-}
+        body {
+            font-family: "Lato", sans-serif;
+        }
 
-/* Overlay info */
-.participant-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(17, 25, 40, 0.6);
-    color: #fff;
-    padding: 20px;
-    backdrop-filter: blur(8px);
-    text-align: center;
-    z-index: 2;
-}
+        /* Welcome message */
+        .welcome-box {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-.participant-name {
-    font-family: 'Righteous', cursive;
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
+        .welcome-box h3 {
+            font-weight: bold;
+            color: #147698;
+        }
 
-.participant-info {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 15px;
-}
+        /* Matched container */
+        .participantcontainer {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+        }
 
-.participant-button-wrapper .participant-btn-outline {
-    border-radius: 24px;
-    padding: 10px 20px;
-    font-weight: bold;
-    border: 1px solid #00d4ff;
-    background: transparent;
-    color: #00d4ff;
-    transition: all 0.3s ease;
-}
+        .participant-card-bg {
+            position: relative;
+            height: 600px;
+            border-radius: 18px;
+            overflow: hidden;
+            /* crop the larger iframe */
+        }
 
-.participant-button-wrapper .participant-btn-outline:hover {
-    background: #00d4ff;
-    color: #fff;
-    transform: scale(1.1);
-}
+        .participant-bg-iframe {
+            position: absolute;
+            width: 120%;
+            /* slightly larger than container */
+            height: 150%;
+            top: -10%;
+            /* center the zoom */
+            left: -10%;
+            pointer-events: none;
+            transition: 0.3s;
+        }
 
-/* Modal styles */
-.participant-video-ratio iframe {
-    border-radius: 12px;
-}
 
-.participant-alert {
-    width: 100%;
-    max-width: 500px;
-}
-</style>
+        .participant-card-bg:hover {
+            transform: scale(1.03);
+        }
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        /* Play Icon */
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 70px;
+            color: #fff;
+            opacity: 0;
+            transition: 0.3s;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            z-index: 10;
+        }
+
+        .participant-card-bg:hover .play-icon {
+            opacity: 1;
+        }
+
+        /* Overlay */
+        .participant-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Buttons */
+        .participant-btn-outline {
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            padding: 10px 20px;
+            border-radius: 24px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .participant-btn-outline:hover {
+            background: #00d4ff;
+            color: white;
+        }
+
+        /* Unmatched view effects */
+        .usercontainer {
+            max-width: 100%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .hover-play-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .custom-block-wrap:hover .hover-play-icon {
+            opacity: 1;
+        }
+
+        .video-thumbnail {
+            transition: transform 0.3s;
+        }
+
+        .custom-block-wrap:hover .video-thumbnail {
+            transform: scale(1.5) !important;
+        }
+    </style>
+
+
+    {{-- ====================== JS ====================== --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Shared modal handler
+        $(document).on('click', '.view-attempts', function () {
+
+            let name = $(this).data('name');
+            let imageId = $(this).data('image');
+            let videoId = $(this).data('video');
+
+            $('#attemptsModalLabel').text(`${name} - Attempts`);
+
+            $('#attemptsImage').attr('src',
+                imageId ? `https://drive.google.com/file/d/${imageId}/preview` : ''
+            ).css({
+                'transform': '',       // remove scaling
+                'transform-origin': '',
+                'transition': 'transform 0.4s ease'
+            });
+
+            // ensure parent container hides overflow when zooming
+            $('#attemptsImage').parent().css('overflow', imageId ? 'hidden' : '');
+
+            // video: reset any zoom and set src normally
+            $('#attemptsVideo').attr('src',
+                videoId ? `https://drive.google.com/file/d/${videoId}/preview` : ''
+            ).css({
+                'transform': '',
+
+            });
+
+
+            new bootstrap.Modal('#attemptsModal').show();
+        });
+
+        // Wipe data when closed
+        $('#attemptsModal').on('hidden.bs.modal', function () {
+            $('#attemptsImage, #attemptsVideo').attr('src', '');
+        });
+    </script>
+
 @endsection

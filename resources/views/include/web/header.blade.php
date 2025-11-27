@@ -1,10 +1,32 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+
+
+<style>
+    .navbar-brand span {
+        color: #002C4D !important;
+        font-weight: 600;
+        font-size: 20px;
+        /* default */
+    }
+
+    @media (max-width: 768px) {
+        .navbar-brand span {
+            font-size: 14px;
+            /* smaller text for mobile */
+            display: block;
+            text-align: center;
+        }
+    }
+</style>
+
+
+
 <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="assets/images/logo.png" class="logo img-fluid" alt="ClearmenGWR">
-            <span style="color:#002C4D !important;">
+            <span>
                 Clear Men Guinness World Record
             </span>
 
@@ -44,7 +66,7 @@
                     </li>
                     @if(!Request::is('user-dashboard'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ '/user-dashboard' }}">Participants List</a>
+                            <a class="nav-link" href="{{ '/user-dashboard' }}">Dashboard</a>
                         </li>
                     @endif
 
@@ -55,93 +77,7 @@
                         </form>
                     </li>
                 @endauth
-
-                <!-- 🔥 Social Icons (Right Side) -->
-                {{-- <li class="d-flex justify-content-end align-items-center ms-3 social-icons">
-                    <a href="https://facebook.com" target="_blank" class="me-3">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" class="me-3">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://tiktok.com" target="_blank">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                </li> --}}
-
             </ul>
         </div>
     </div>
 </nav>
-
-
-{{-- <style>
-    .nav-custom-btn {
-        font-weight: 500;
-        color: #065daf !important;
-    }
-
-    .navbar-brand span {
-        white-space: nowrap;
-    }
-
-    .social-icons i {
-        font-size: 16px;
-        color: #002C4D;
-        transition: 0.3s ease;
-    }
-
-    .social-icons i:hover {
-        transform: scale(1.2);
-        color: #065daf;
-    }
-
-    @media (max-width: 992px) {
-        .navbar-brand span {
-            font-size: 14px;
-        }
-
-        .navbar-brand small {
-            font-size: 11px !important;
-        }
-
-        .navbar-nav {
-            text-align: center;
-            padding-top: 15px;
-        }
-
-        .navbar-nav .nav-item {
-            margin-bottom: 10px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .navbar-brand img {
-            width: 40%;
-            max-width: 40px;
-            padding-top: 8%;
-        }
-
-        .navbar-brand span {
-            font-size: 13px;
-            line-height: 1.1;
-        }
-
-        .navbar-brand small {
-            font-size: 10px !important;
-        }
-
-        .navbar-nav .nav-link {
-            font-size: 14px;
-        }
-
-        .navbar-nav .btn {
-            font-size: 14px !important;
-            padding: 8px 14px;
-        }
-
-        .navbar-toggler {
-            padding: 6px 8px;
-        }
-    }
-</style> --}}

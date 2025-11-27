@@ -7,6 +7,7 @@ use App\Imports\ParticipantsImport;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,17 +28,18 @@ class ParticipantController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 return '
-            <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
+            
             <a href="' . route('participants.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>
-            <form action="' . route('participants.destroy', $row->id) . '" method="POST" style="display:inline">
-                ' . csrf_field() . method_field('DELETE') . '
-                <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
-            </form>
-        ';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+            ';
+        })
+        ->rawColumns(['action'])
+        ->make(true);
     }
+    // <form action="' . route('participants.destroy', $row->id) . '" method="POST" style="display:inline">
+    //     ' . csrf_field() . method_field('DELETE') . '
+    //     <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
+    // </form>
+    // <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
 
     public function userDashboard()
     {
@@ -73,15 +75,22 @@ class ParticipantController extends Controller
 
     public function participantsDashboard()
     {
-        $user = Auth::user();
+        $userPhone = Auth::user()->phone;
+        $userName = Auth::user()->name;
 
-        // Match phone number in participants table
-        $participant = Participant::where('phone', $user->phone)
-            ->select('name', 'phone', 'email', 'drive_video_file_id', 'drive_image_file_id')
+        $participant = DB::table('participants')
+            ->where('phone', $userPhone)
+            ->select('id', 'name', 'phone', 'email', 'drive_video_file_id', 'drive_image_file_id')
             ->first();
-            // dd($participant);
 
-        return view('web.participants.dashboard', compact('participant'));
+        $participants = DB::table('participants')
+            ->whereNotNull('drive_video_file_id')
+            ->select('id', 'name', 'drive_video_file_id', 'drive_image_file_id')
+            ->inRandomOrder()
+            ->limit(12)
+            ->get();
+
+        return view('web.participants.dashboard', compact('participant', 'participants'));
     }
 
     public function create()

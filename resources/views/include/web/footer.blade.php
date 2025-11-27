@@ -39,7 +39,7 @@
 
 
 <footer class="site-footer" style="padding: 0; text-align: center; background-color: #111;">
-    <div class="container" style="padding: 0;">
+    <div class="container" style="padding: 0; overflow: hidden;">
         <div class="row">
             <div class="col-lg-12 col-12 mb-12" style="padding: 0;">
                 <img src="assets/images/logo2.png" alt="Footer Logo" draggable="false" oncontextmenu="return false;"
