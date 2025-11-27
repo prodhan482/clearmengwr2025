@@ -13,7 +13,7 @@
                 <!-- Welcome Section -->
                 <div class="welcome-box">
                     <h3>🎉 Congratulations, {{ $participant->name }}!</h3>
-                    <p>Thank you for participating in the <strong>Clear Men Guinness World Records Official Attempt</strong>.
+                    <p>Thank you for participating in the <strong>Clear Men Guinness World Records (Official Attempt)</strong>.
                     </p>
                 </div>
 
@@ -36,7 +36,7 @@
                         <div class="participant-button-wrapper">
                             <a href="https://docs.google.com/forms/d/18NWtKOTJbH8zbqUo8OFHNTiJBW5eTfHhRJn2u-abcde/viewform"
                                 target="_blank" class="participant-btn-outline">
-                                Fill the Form
+                                Click Here To Issue Your Certificate
                             </a>
                         </div>
                     </div>
@@ -51,8 +51,15 @@
             <div class="usercontainer">
                 <div class="row">
                     <div class="col-lg-12 text-center mb-4">
-                        <h3>WELCOME TO<strong style="color: #031038;"> CLEAR MEN GUINNESS WORLD RECORD OFFICIAL
-                                ATTEMPTS</strong></h3>
+                        <h3 style="font-family: Arial, sans-serif; font-weight: bold; font-size: 28px;">
+                            WELCOME TO
+                            <strong style="color: #031038; font-size: 32px;">
+                                CLEAR MEN GUINNESS WORLD RECORDS (<span style="color: #FF5733 !important;">OFFICIAL
+                                    ATTEMPTS</span>)
+                            </strong>
+                        </h3>
+
+
                         <p class="mt-2">Here are some official attempt videos you can watch:</p>
                     </div>
                 </div>
@@ -92,7 +99,7 @@
 
 
 
-    
+
     @include('web.participants.attempts-modal')
 
 

@@ -27,7 +27,7 @@
         <a class="navbar-brand" href="/">
             <img src="assets/images/logo.png" class="logo img-fluid" alt="ClearmenGWR">
             <span>
-                Clear Men Guinness World Record
+                Clear Men Guinness World Records
             </span>
 
             <p style="color: #002C4D; font-size: 4px; margin: 5px 0 0 0;">
