@@ -14,6 +14,10 @@
             text-align: center;
         }
     }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -33,7 +37,7 @@
         <!-- Navbar Toggler -->
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon color-white"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -61,21 +65,34 @@
                 @endguest
 
                 @auth
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-lg-block">
+                        <!-- Desktop: normal inline display -->
                         <span class="nav-link">{{ Auth::user()->name }}</span>
                     </li>
-                    @if(!Request::is('user-dashboard'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ '/user-dashboard' }}">Dashboard</a>
-                        </li>
-                    @endif
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-lg-block">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button class="logout-btn" type="submit">Logout</button>
+                            <button class="btn btn-outline-primary logout-btn" type="submit">Logout</button>
                         </form>
                     </li>
+
+                    <!-- Mobile: two-column centered display -->
+                    <li class="nav-item d-lg-none w-100">
+                        <div class="row text-center w-100">
+                            <div class="col-6">
+                                <span class="nav-link">{{ Auth::user()->name }}</span>
+                            </div>
+                            <div class="col-6">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="btn btn-outline-primary logout-btn" style="size: 10px;"
+                                        type="submit">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
                 @endauth
+
             </ul>
         </div>
     </div>
@@ -83,3 +100,20 @@
 
 <!-- Bootstrap JS (required for toggle) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const navbarCollapse = document.getElementById('navbarNav');
+
+        function checkWidth() {
+            if (window.innerWidth <= 768) {
+                navbarCollapse.classList.add('show'); // force expand on mobile
+            } else {
+                navbarCollapse.classList.remove('show'); // collapse on larger screens
+            }
+        }
+
+        checkWidth(); // run on page load
+        window.addEventListener('resize', checkWidth); // run on resize
+    });
+</script>

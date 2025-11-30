@@ -20,8 +20,8 @@ use Spatie\Permission\Middleware\RoleMiddleware;
  */
 Auth::routes();
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
+Route::get('login', [LoginController::class, 'showLoginForm']) ->middleware('guest')->name('login');
+Route::post('login', [LoginController::class, 'login']) ->middleware('guest');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.create');
 
@@ -30,8 +30,8 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
  * | Public / Frontend Routes
  * |--------------------------------------------------------------------------
  */
-Route::get('/', [ImageController::class, 'getHeroImages'])->name('home');
-Route::get('/images/{type}', [ImageController::class, 'getHeroImages']);
+Route::get('/', [ImageController::class, 'getHeroImages'])->name('home') ->middleware('guest');
+Route::get('/images/{type}', [ImageController::class, 'getHeroImages']) ->middleware('guest');
 
 /*
  * |--------------------------------------------------------------------------

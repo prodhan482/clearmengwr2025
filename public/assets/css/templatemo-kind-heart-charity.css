@@ -422,6 +422,8 @@ strong {
 /*-------------------------------
   CUSTOM TOGGLER
 ---------------------------------*/
+
+
 .navbar-toggler {
   border: 0;
   padding: 0;
@@ -435,61 +437,14 @@ strong {
   display: block;
   width: 80%;
   height: 3px;
-  background-color: var(--dark-color);
+  background-color: white;
   position: relative;
   transition: all 0.3s ease;
 }
 
-.navbar-toggler-icon::before,
-.navbar-toggler-icon::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: var(--dark-color);
-  position: absolute;
-  left: 0;
-  transition: all 0.3s ease;
-}
 
-.navbar-toggler-icon::before {
-  top: -10px;
-}
 
-.navbar-toggler-icon::after {
-  top: 10px;
-}
 
-/* ✅ Animate when button is expanded (open) */
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-  background-color: transparent;
-}
-
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
-  transform: rotate(45deg) translate(5px, 5px);
-  top: 0;
-}
-
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
-  transform: rotate(-45deg) translate(5px, -5px);
-  top: 0;
-}
-
-/* ✅ Animate back to closed state */
-.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon {
-  background-color: #000;
-  /* Show middle line again */
-}
-
-.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon::before {
-  transform: rotate(0) translate(0, 0);
-  top: -10px;
-}
-
-.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon::after {
-  transform: rotate(0) translate(0, 0);
-  top: 10px;
-}
 
 
 

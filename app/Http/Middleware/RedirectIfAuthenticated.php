@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Closure;
 
 class RedirectIfAuthenticated
 {
@@ -21,7 +21,18 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $user = Auth::user();
+
+                if ($user->hasRole('SUPER_ADMIN')) {
+                    return redirect()->route('dashboard');  // Admin dashboard
+                }
+
+                if ($user->hasRole('USER')) {
+                    return redirect()->route('user-dashboard');  // User dashboard
+                }
+
+                // fallback for other roles or no role assigned
+                return redirect('/');
             }
         }
 
