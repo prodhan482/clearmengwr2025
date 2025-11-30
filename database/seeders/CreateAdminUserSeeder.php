@@ -19,16 +19,18 @@ class CreateAdminUserSeeder extends Seeder
     {
         $users = [
             [
-            'name' => 'Md. Prodhan',
-            'email' => 'dulal.prodhan@clearmengwr.com',
-            'password' => Hash::make('hvl2025'),
-            'phone' => '01641366908',
+                'name' => 'Md. Prodhan',
+                'email' => 'dulal.prodhan@clearmengwr.com',
+                'password' => Hash::make('hvl2025'),
+                'phone' => '01641366908',
+                'account_type' => 'SUPER_ADMIN',
             ],
             [
-            'name' => 'HIGH VOLTAGE LTD.',
-            'email' => 'hvl@clearmengwr.com',
-            'password' => Hash::make('hvl@clearmen2025'),
-            'phone' => '01999999990',
+                'name' => 'HIGH VOLTAGE LTD.',
+                'email' => 'hvl@clearmengwr.com',
+                'password' => Hash::make('hvl@clearmen2025'),
+                'phone' => '01999999990',
+                'account_type' => 'SUPER_ADMIN',
             ],
             // [
             // 'name' => 'Manager',
@@ -52,14 +54,13 @@ class CreateAdminUserSeeder extends Seeder
 
         foreach ($users as $userData) {
             $user = User::create($userData);
+            $role = Role::findOrCreate('SUPER_ADMIN');
+
+            $permissions = Permission::pluck('id', 'id')->all();
+
+            $role->syncPermissions($permissions);
+
+            $user->assignRole([$role->id]);
         }
-
-        $role = Role::findOrCreate('SUPER_ADMIN');
-
-        $permissions = Permission::pluck('id', 'id')->all();
-
-        $role->syncPermissions($permissions);
-
-        $user->assignRole([$role->id]);
     }
 }

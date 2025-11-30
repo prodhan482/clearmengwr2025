@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('camera_no')->nullable();  // Camera No.
             $table->string('name')->nullable();  // Participant Name
             $table->string('email')->nullable()->index();  // Email Address
-            $table->string('phone')->nullable()->index()->unique();
+            $table->string('phone')->nullable()->index();
 
             // Google Drive file IDs
             $table->string('drive_video_file_id')->nullable()->index();

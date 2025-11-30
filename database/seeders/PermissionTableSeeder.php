@@ -32,6 +32,7 @@ class PermissionTableSeeder extends Seeder
             'banner-edit',
             'banner-delete',
             'super-admin',
+            'participant-dasboard',
         ];
 
         foreach ($permissions as $permission) {

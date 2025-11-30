@@ -21,20 +21,37 @@ class ParticipantController extends Controller
 
     public function jsonAdmin()
     {
-        $participants = Participant::orderBy('video_chain_serial', 'asc');
+        $participants = Participant::select([
+            'id',
+            'date_taken',
+            'location',
+            'camera_no',
+            'name',
+            'phone',
+            'email',
+            'image_library_file_no',
+            'video_library_file_no',
+            'video_chain_serial',
+            'drive_video_file_id',
+            'drive_image_file_id'
+        ])->orderBy('video_chain_serial', 'asc');
 
-        return datatables()
-            ->of($participants)
+        return DataTables::of($participants)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 return '
-            
-            <a href="' . route('participants.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>
+                <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
+                <a href="' . route('participants.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>
+                <form method="POST" action="' . route('participants.destroy', $row->id) . '" style="display:inline">
+                    ' . csrf_field() . method_field('DELETE') . '
+                    <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                </form>
             ';
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
+
     // <form action="' . route('participants.destroy', $row->id) . '" method="POST" style="display:inline">
     //     ' . csrf_field() . method_field('DELETE') . '
     //     <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>

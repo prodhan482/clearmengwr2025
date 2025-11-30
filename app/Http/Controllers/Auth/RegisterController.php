@@ -60,20 +60,18 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'account_type' => 'USER',
         ]);
 
         // Find or create the "USER" role
         $role = Role::findOrCreate('USER');
 
         // Sync all permissions to this role (optional)
-        $permissions = Permission::pluck('id')->all();
-        $role->syncPermissions($permissions);
-
+        $permission = Permission::firstOrCreate(['name' => 'participant-dashboard']);
+        $role->syncPermissions([$permission]);
         // Assign role to user
         $user->assignRole($role);
 
         return $user;
     }
-
-    
 }
