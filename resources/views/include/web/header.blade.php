@@ -106,11 +106,14 @@
         const navbarCollapse = document.getElementById('navbarNav');
 
         function checkWidth() {
-            if (window.innerWidth <= 768) {
-                navbarCollapse.classList.add('show'); // force expand on mobile
-            } else {
-                navbarCollapse.classList.remove('show'); // collapse on larger screens
-            }
+            // Only auto-expand if user is authenticated
+            @auth
+                if (window.innerWidth <= 768) {
+                    navbarCollapse.classList.add('show'); // expand on mobile for authenticated
+                } else {
+                    navbarCollapse.classList.remove('show'); // collapse on larger screens
+                }
+            @endauth
         }
 
         checkWidth(); // run on page load
