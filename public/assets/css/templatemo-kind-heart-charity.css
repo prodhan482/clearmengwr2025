@@ -433,7 +433,7 @@ strong {
 
 .navbar-toggler-icon {
   display: block;
-  width: 100%;
+  width: 80%;
   height: 3px;
   background-color: var(--dark-color);
   position: relative;
@@ -473,6 +473,22 @@ strong {
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
   transform: rotate(-45deg) translate(5px, -5px);
   top: 0;
+}
+
+/* ✅ Animate back to closed state */
+.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon {
+  background-color: #000;
+  /* Show middle line again */
+}
+
+.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon::before {
+  transform: rotate(0) translate(0, 0);
+  top: -10px;
+}
+
+.navbar-toggler[aria-expanded="false"] .navbar-toggler-icon::after {
+  transform: rotate(0) translate(0, 0);
+  top: 10px;
 }
 
 

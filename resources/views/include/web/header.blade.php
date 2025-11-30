@@ -10,7 +10,7 @@
         .navbar-brand span {
             font-size: 14px;
             /* smaller text for mobile */
-            display: block;
+            /* display: block; */
             text-align: center;
         }
     }
