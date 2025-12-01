@@ -90,25 +90,29 @@ class ParticipantController extends Controller
             ->make(true);
     }
 
-    public function participantsDashboard()
-    {
-        $userPhone = Auth::user()->phone;
-        $userName = Auth::user()->name;
+// ExampleController.php
+public function participantsDashboard()
+{
+    $userPhone = Auth::user()->phone;
 
-        $participant = DB::table('participants')
-            ->where('phone', $userPhone)
-            ->select('id', 'name', 'phone', 'email', 'drive_video_file_id', 'drive_image_file_id')
-            ->first();
+    // matched participants for the current user (could be a collection)
+    $matched = DB::table('participants')
+                 ->where('phone', $userPhone)
+                 ->get(); // ->get() returns a Collection
 
-        $participants = DB::table('participants')
-            ->whereNotNull('drive_video_file_id')
-            ->select('id', 'name', 'drive_video_file_id', 'drive_image_file_id')
-            ->inRandomOrder()
-            ->limit(12)
-            ->get();
+    // other participants listing (unmatched grid)
+    $participants = DB::table('participants')
+                      ->whereNotNull('drive_image_file_id')
+                      ->limit(12)
+                      ->get();
 
-        return view('web.participants.dashboard', compact('participant', 'participants'));
-    }
+    return view('web.participants.dashboard', [
+        'matched' => $matched,
+        'participant_count' => $matched->count(),
+        'participants' => $participants,
+    ]);
+}
+
 
     public function create()
     {
