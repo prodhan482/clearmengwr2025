@@ -3,7 +3,10 @@
 @section('content')
 
 
-    @if($participant)
+
+
+
+    @if ($participant_count == 1)
         <section class="section-padding" id="section_3">
 
             {{-- ================== MATCHED VIEW ================== --}}
@@ -12,8 +15,9 @@
 
                 <!-- Welcome Section -->
                 <div class="welcome-box">
-                    <h3>🎉 Congratulations, {{ $participant->name }}!</h3>
-                    <p>Thank you for participating in the <strong>Clear Men Guinness World Records (Official Attempt)</strong>.
+                    <h3>🎉 Congratulations, {{ $matched[0]->name }}!</h3>
+                    <p>Thank you for participating in the <strong>Clear Men Guinness World Records (Official
+                            Attempt)</strong>.
                     </p>
                 </div>
 
@@ -43,9 +47,93 @@
                 </div>
             </div>
         </section>
+    @elseif($participant_count == 2)
+        <section class="section-padding" id="section_3">
+            <div class="container">
+                <div class="welcome-box">
+                    <h3>🎉 Congratulations, {{ $matched[0]->name }}!</h3>
+                    <p>Thank you for participating in the <strong>Clear Men Guinness World Records (Official
+                            Attempt)</strong>.
+                    </p>
+                </div>
+                <div class="row">
 
+                    @foreach ($matched as $m)
+                        <div class="col-lg-6 col-md-6 col-12 mb-4">
+                            <div class="participant-card-bg view-attempts" data-name="{{ $m->name }}"
+                                data-image="{{ $m->drive_image_file_id }}" data-video="{{ $m->drive_video_file_id }}">
+
+                                <iframe
+                                    src="https://drive.google.com/file/d/{{ $m->drive_image_file_id }}/preview?rm=minimal"
+                                    class="participant-bg-iframe" frameborder="0"></iframe>
+
+                                <div class="play-icon">▶</div>
+
+                                <div class="participant-overlay">
+                                    <h1 class="participant-name">{{ $m->name }}</h1>
+                                    <p class="participant-info text-white">
+                                        Phone: {{ $m->phone }} <br>
+                                        Email: {{ $m->email }}
+                                    </p>
+
+                                    <div class="participant-button-wrapper">
+                                        <a href="https://docs.google.com/forms/d/18NWtKOTJbH8zbqUo8OFHNTiJBW5eTfHhRJn2u-abcde/viewform"
+                                            target="_blank" class="participant-btn-outline">
+                                            Click Here To Issue Your Certificate
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+    @elseif($participant_count > 2)
+        <section class="section-padding" id="section_3">
+            <div class="container">
+                <div class="welcome-box">
+                    <h3>🎉 Congratulations, {{ $matched[0]->name }}!</h3>
+                    <p>Thank you for participating in the <strong>Clear Men Guinness World Records (Official
+                            Attempt)</strong>.
+                    </p>
+                </div>
+                <div class="row">
+
+                    @foreach ($matched as $m)
+                        <div class="col-lg-6 col-md-6 col-12 mb-4">
+                            <div class="participant-card-bg view-attempts" data-name="{{ $m->name }}"
+                                data-image="{{ $m->drive_image_file_id }}" data-video="{{ $m->drive_video_file_id }}">
+
+                                <iframe
+                                    src="https://drive.google.com/file/d/{{ $m->drive_image_file_id }}/preview?rm=minimal"
+                                    class="participant-bg-iframe" frameborder="0"></iframe>
+
+                                <div class="play-icon">▶</div>
+
+                                <div class="participant-overlay">
+                                    <h1 class="participant-name">{{ $m->name }}</h1>
+                                    <p class="participant-info text-white">
+                                        Phone: {{ $m->phone }} <br>
+                                        Email: {{ $m->email }}
+                                    </p>
+
+                                    <div class="participant-button-wrapper">
+                                        <a href="https://docs.google.com/forms/d/18NWtKOTJbH8zbqUo8OFHNTiJBW5eTfHhRJn2u-abcde/viewform"
+                                            target="_blank" class="participant-btn-outline">
+                                            Click Here To Issue Your Certificate
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
     @else
-
         {{-- ================== UNMATCHED VIEW ================== --}}
         <section class="section-padding" id="section_3">
             <div class="usercontainer">
@@ -65,20 +153,23 @@
                 </div>
 
                 <div class="row g-4">
-                    @foreach($participants as $p)
+                    @foreach ($participants as $p)
                         <div class="col-lg-3 col-md-6 col-12 mb-4">
                             <div class="custom-block-wrap position-relative view-attempts" data-name="{{ $p->name }}"
-                                data-image="{{ $p->drive_image_file_id ?? '' }}" data-video="{{ $p->drive_video_file_id ?? '' }}">
+                                data-image="{{ $p->drive_image_file_id ?? '' }}"
+                                data-video="{{ $p->drive_video_file_id ?? '' }}">
 
                                 <div class="video-wrapper"
                                     style="position:relative; padding-bottom:100%;overflow:hidden;border-radius:10px;">
-                                    <iframe src="https://drive.google.com/file/d/{{ $p->drive_image_file_id ?? '' }}/preview"
+                                    <iframe
+                                        src="https://drive.google.com/file/d/{{ $p->drive_image_file_id ?? '' }}/preview"
                                         class="video-thumbnail"
                                         style="position:absolute;top:0;left:-10px;width:100%;height:100%;transform:scale(1.4);border:0;"
                                         allowfullscreen></iframe>
 
                                     <div class="hover-play-icon d-flex justify-content-center align-items-center">
-                                        <i class="fas fa-play-circle" style="font-size: 60px; color: rgba(255,255,255,0.8);"></i>
+                                        <i class="fas fa-play-circle"
+                                            style="font-size: 60px; color: rgba(255,255,255,0.8);"></i>
                                     </div>
                                 </div>
 
@@ -92,8 +183,6 @@
                 </div>
             </div>
         </section>
-
-
     @endif
 
 
@@ -239,7 +328,7 @@
 
     <script>
         // Shared modal handler
-        $(document).on('click', '.view-attempts', function () {
+        $(document).on('click', '.view-attempts', function() {
 
             let name = $(this).data('name');
             let imageId = $(this).data('image');
@@ -250,7 +339,7 @@
             $('#attemptsImage').attr('src',
                 imageId ? `https://drive.google.com/file/d/${imageId}/preview` : ''
             ).css({
-                'transform': '',       // remove scaling
+                'transform': '', // remove scaling
                 'transform-origin': '',
                 'transition': 'transform 0.4s ease'
             });
@@ -271,7 +360,7 @@
         });
 
         // Wipe data when closed
-        $('#attemptsModal').on('hidden.bs.modal', function () {
+        $('#attemptsModal').on('hidden.bs.modal', function() {
             $('#attemptsImage, #attemptsVideo').attr('src', '');
         });
     </script>
