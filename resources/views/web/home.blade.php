@@ -45,8 +45,8 @@
         </div>
     </section>
 
-{{-- 
-    <section class="section-padding" id="section_3">
+
+    {{-- <section class="section-padding" id="section_3">
         <div class="container">
             
             <div class="row">
@@ -63,7 +63,77 @@
         </div>
     </section> --}}
 
+<section class="section-padding" id="section_3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
 
+                <div class="video-container" 
+                     style="position:relative;width:100%;padding-bottom:56.25%;border-radius:10px;overflow:hidden;">
+
+                    <!-- THUMBNAIL -->
+                    <div id="video-thumb" 
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;">
+                        <img src="{{ asset('assets/images/image.png' ) }}"
+                             style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+                        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+                                    font-size:60px;color:white;">
+
+                                    
+                            ▶
+                        </div>
+                    </div>
+
+                    <!-- IFRAME (hidden initially) -->
+                    <iframe id="drive-video"
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:none;"
+                        allowfullscreen>
+                    </iframe>
+
+                    <!-- HOVER FULL VIDEO BUTTON -->
+                    <a href="https://drive.google.com/file/d/1ztmd7Nzjpywk4N-PcJz4pmYHjiXmGChg/view"
+                       target="_blank"
+                       class="full-video-btn"
+                       style="position:absolute;bottom:10px;right:10px;padding:10px 15px;
+                              background:rgba(0,0,0,0.6);color:white;border-radius:6px;
+                              opacity:0;transition:0.3s;text-decoration:none;font-size:14px;">
+                        View Full Video
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const thumb = document.getElementById("video-thumb");
+    const iframe = document.getElementById("drive-video");
+    const videoBtn = document.querySelector(".full-video-btn");
+
+    thumb.addEventListener("click", function () {
+
+        // Load Google Drive iframe
+        iframe.src = "https://drive.google.com/file/d/1ztmd7Nzjpywk4N-PcJz4pmYHjiXmGChg/preview";
+
+        // Hide thumbnail
+        thumb.style.display = "none";
+
+        // Show video after slight delay (prevents infinite loading)
+        setTimeout(() => {
+            iframe.style.display = "block";
+        }, 1200); // 1.2 seconds to avoid Google Drive spinner freeze
+    });
+
+    // Hover effect for showing full video button
+    document.querySelector(".video-container").addEventListener("mouseenter", () => {
+        videoBtn.style.opacity = 1;
+    });
+    document.querySelector(".video-container").addEventListener("mouseleave", () => {
+        videoBtn.style.opacity = 0;
+    });
+</script>
 
 
 
