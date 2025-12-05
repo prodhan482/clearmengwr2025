@@ -81,9 +81,9 @@
                         </div>
 
                         {!! Form::model($participant, [
-        'route' => ['participants.update', $participant->id],
-        'method' => 'PUT'
-    ]) !!}
+                            'route' => ['participants.update', $participant->id],
+                            'method' => 'PUT',
+                        ]) !!}
 
                         @csrf
 
@@ -91,7 +91,8 @@
                         <div class="form-group mb-3">
                             <label>Activation</label>
                             <label class="toggle-wrapper">
-                                <input type="checkbox" name="is_active" id="is_active" {{ $participant->is_active ? 'checked' : '' }}>
+                                <input type="checkbox" name="is_active" id="is_active"
+                                    {{ $participant->is_active ? 'checked' : '' }}>
                                 <span class="toggle-switch"></span>
                                 <i class="fas toggle-icon" id="toggleIcon"></i>
                             </label>
@@ -114,12 +115,12 @@
                             <div class="form-group">
                                 <label>Phone (Bangladesh)</label>
                                 {!! Form::text('phone', $participant->phone, [
-        'class' => 'form-control',
-        'placeholder' => 'e.g. 01XXXXXXXXX or +8801XXXXXXXXX',
-        'pattern' => '^(?:\+?88)?01[3-9]\d{8}$',
-        'title' => 'Bangladeshi mobile number. Allowed: 01XXXXXXXXX or +8801XXXXXXXXX',
-        'inputmode' => 'tel'
-    ]) !!}
+                                    'class' => 'form-control',
+                                    'placeholder' => 'e.g. 01XXXXXXXXX or +8801XXXXXXXXX',
+                                    'pattern' => '^(?:\+?88)?01[3-9]\d{8}$',
+                                    'title' => 'Bangladeshi mobile number. Allowed: 01XXXXXXXXX or +8801XXXXXXXXX',
+                                    'inputmode' => 'tel',
+                                ]) !!}
                                 <small class="form-text text-muted">Format: 01XXXXXXXXX or +8801XXXXXXXXX</small>
                             </div>
                         </div>
@@ -140,11 +141,17 @@
                         <div class="form-top-row mt-3">
                             <div class="form-group">
                                 <label>Drive Video File ID / URL</label>
-                                {!! Form::text('drive_video_file_id', $participant->drive_video_file_id, ['class' => 'form-control', 'placeholder' => 'File ID or full Google Drive URL']) !!}
+                                {!! Form::text('drive_video_file_id', $participant->drive_video_file_id, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'File ID or full Google Drive URL',
+                                ]) !!}
                             </div>
                             <div class="form-group">
                                 <label>Drive Image File ID / URL</label>
-                                {!! Form::text('drive_image_file_id', $participant->drive_image_file_id, ['class' => 'form-control', 'placeholder' => 'File ID or full Google Drive URL']) !!}
+                                {!! Form::text('drive_image_file_id', $participant->drive_image_file_id, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'File ID or full Google Drive URL',
+                                ]) !!}
                             </div>
                         </div>
 
@@ -164,6 +171,26 @@
                             </div>
                         </div>
 
+                        {{-- Fifth Row: Video Length & Action Performed --}}
+                        <div class="form-top-row mt-3">
+                            <div class="form-group">
+                                <label>Video Length (in seconds or mm:ss)</label>
+                                {!! Form::text('video_length', $participant->video_length, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'e.g. 120 or 02:00',
+                                ]) !!}
+                            </div>
+
+                            <div class="form-group">
+                                <label>Action Performed</label>
+                                {!! Form::text('action_performed', $participant->action_performed, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'Describe action performed',
+                                ]) !!}
+                            </div>
+                        </div>
+
+
                         {{-- Submit --}}
                         <div class="mt-4 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">Update Participant</button>
@@ -177,7 +204,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const isActive = document.getElementById('is_active');
             const toggleIcon = document.getElementById('toggleIcon');
 

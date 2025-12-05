@@ -86,7 +86,7 @@
                                     'placeholder' => 'e.g. 01XXXXXXXXX or +8801XXXXXXXXX',
                                     'pattern' => '^(\+?88)?01[3-9][0-9]{8}$',
                                     'title' => 'Enter a Bangladeshi mobile number. Accepts 01XXXXXXXXX or +8801XXXXXXXXX formats.',
-                                    'maxlength' => 14
+                                    'maxlength' => 14,
                                 ]) !!}
                             </div>
                         </div>
@@ -95,7 +95,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <strong>Drive Image File ID / URL:</strong>
-                                {!! Form::text('drive_image_file_id', null, ['class' => 'form-control', 'placeholder' => 'File ID or full Google Drive URL']) !!}
+                                {!! Form::text('drive_image_file_id', null, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'File ID or full Google Drive URL',
+                                ]) !!}
                             </div>
                         </div>
 
@@ -103,7 +106,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <strong>Drive Video File ID / URL:</strong>
-                                {!! Form::text('drive_video_file_id', null, ['class' => 'form-control', 'placeholder' => 'File ID or full Google Drive URL']) !!}
+                                {!! Form::text('drive_video_file_id', null, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'File ID or full Google Drive URL',
+                                ]) !!}
                             </div>
                         </div>
 
@@ -130,6 +136,26 @@
                                 {!! Form::text('video_chain_serial', null, ['class' => 'form-control', 'placeholder' => 'Video Chain Serial']) !!}
                             </div>
                         </div>
+
+                        {{-- Video Length --}}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong>Video Length (in seconds or mm:ss):</strong>
+                                {!! Form::text('video_length', null, ['class' => 'form-control', 'placeholder' => 'e.g. 45 or 01:25']) !!}
+                            </div>
+                        </div>
+
+                        {{-- Action Performed --}}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <strong>Action Performed:</strong>
+                                {!! Form::text('action_performed', null, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'e.g. Running, Walking, Exercise',
+                                ]) !!}
+                            </div>
+                        </div>
+
 
                         {{-- Submit Button --}}
                         <div class="col-md-12 text-center mt-3">

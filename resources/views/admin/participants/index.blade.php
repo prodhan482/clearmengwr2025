@@ -233,7 +233,6 @@
 @extends('layouts.dashboard_layout')
 
 @section('custom_style')
-
     <!-- DataTables CSS -->
     <link href="{{ asset('/plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css">
@@ -289,7 +288,6 @@
             }
         }
     </style>
-
 @endsection
 
 
@@ -336,6 +334,8 @@
                                     <th>Image Library #</th>
                                     <th>Video Library #</th>
                                     <th>Video Chain Serial</th>
+                                    <th>Video Length</th>
+                                    <th>Action Performed</th>
                                     <th>Drive Video</th>
                                     <th>Drive Image</th>
                                     <th>Action</th>
@@ -372,53 +372,92 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 
 
 @section('extra_js')
-
     <script src="{{ asset('/plugins/tables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('/plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             let table = $('#participants-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('participants.json.admin') }}",  // <-- Must match your route
-                columns: [
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                    { data: 'date_taken', name: 'date_taken' },
-                    { data: 'location', name: 'location' },
-                    { data: 'camera_no', name: 'camera_no' },
-                    { data: 'name', name: 'name' },
-                    { data: 'phone', name: 'phone' },
-                    { data: 'email', name: 'email' },
-                    { data: 'image_library_file_no', name: 'image_library_file_no' },
-                    { data: 'video_library_file_no', name: 'video_library_file_no' },
-                    { data: 'video_chain_serial', name: 'video_chain_serial' },
+                ajax: "{{ route('participants.json.admin') }}", // <-- Must match your route
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'date_taken',
+                        name: 'date_taken'
+                    },
+                    {
+                        data: 'location',
+                        name: 'location'
+                    },
+                    {
+                        data: 'camera_no',
+                        name: 'camera_no'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'image_library_file_no',
+                        name: 'image_library_file_no'
+                    },
+                    {
+                        data: 'video_library_file_no',
+                        name: 'video_library_file_no'
+                    },
+                    {
+                        data: 'video_chain_serial',
+                        name: 'video_chain_serial'
+                    },
+                    {
+                        data: 'video_length',
+                        name: 'video_length'
+                        
+                    },
+                    {
+                        data: 'action_performed',
+                        name: 'action_performed'
+                    },
+
 
                     {
                         data: 'drive_video_file_id',
                         name: 'drive_video_file_id',
-                        render: function (data, type, row) {
-                            return data
-                                ? `<button class="btn btn-primary btn-sm viewPreview" data-type="Video" data-id="${data}" data-name="${row.name}">View</button>`
-                                : "N/A";
+                        render: function(data, type, row) {
+                            return data ?
+                                `<button class="btn btn-primary btn-sm viewPreview" data-type="Video" data-id="${data}" data-name="${row.name}">View</button>` :
+                                "N/A";
                         }
                     },
 
                     {
                         data: 'drive_image_file_id',
                         name: 'drive_image_file_id',
-                        render: function (data, type, row) {
-                            return data
-                                ? `<button class="btn btn-success btn-sm viewPreview" data-type="Image" data-id="${data}" data-name="${row.name}">View</button>`
-                                : "N/A";
+                        render: function(data, type, row) {
+                            return data ?
+                                `<button class="btn btn-success btn-sm viewPreview" data-type="Image" data-id="${data}" data-name="${row.name}">View</button>` :
+                                "N/A";
                         }
                     },
 
@@ -434,7 +473,7 @@
             });
 
             // Handle Preview Modal
-            $(document).on("click", ".viewPreview", function () {
+            $(document).on("click", ".viewPreview", function() {
                 let type = $(this).data("type");
                 let id = $(this).data("id");
                 let name = $(this).data("name");
@@ -447,5 +486,4 @@
 
         });
     </script>
-
 @endsection

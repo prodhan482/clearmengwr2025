@@ -19,27 +19,32 @@ class ParticipantController extends Controller
         return view('admin.participants.index', compact('participants'));
     }
 
-    public function jsonAdmin()
-    {
-        $participants = Participant::select([
-            'id',
-            'date_taken',
-            'location',
-            'camera_no',
-            'name',
-            'phone',
-            'email',
-            'image_library_file_no',
-            'video_library_file_no',
-            'video_chain_serial',
-            'drive_video_file_id',
-            'drive_image_file_id'
-        ])->orderBy('video_chain_serial', 'asc');
+public function jsonAdmin()
+{
+    $participants = Participant::select([
+        'id',
+        'date_taken',
+        'location',
+        'camera_no',
+        'name',
+        'phone',
+        'email',
+        'image_library_file_no',
+        'video_library_file_no',
+        'video_chain_serial',
+        'drive_video_file_id',
+        'drive_image_file_id',
+        'action_performed',
+        'video_length',
+    ]);
 
-        return DataTables::of($participants)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                return '
+    return DataTables::of($participants)
+        ->order(function ($query) {
+            $query->orderBy('video_chain_serial', 'asc');
+        })
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+            return '
                 <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
                 <a href="' . route('participants.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>
                 <form method="POST" action="' . route('participants.destroy', $row->id) . '" style="display:inline">
@@ -47,16 +52,13 @@ class ParticipantController extends Controller
                     <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                 </form>
             ';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-    }
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+}
 
-    // <form action="' . route('participants.destroy', $row->id) . '" method="POST" style="display:inline">
-    //     ' . csrf_field() . method_field('DELETE') . '
-    //     <button class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
-    // </form>
-    // <a href="' . route('participants.show', $row->id) . '" class="btn btn-info btn-sm">View</a>
+
+
 
     public function userDashboard()
     {
@@ -72,7 +74,9 @@ class ParticipantController extends Controller
             'email',
             'location',
             'drive_video_file_id',
-            'drive_image_file_id'
+            'drive_image_file_id',
+            'action_performed',
+            'video_length',
         ])->orderBy('video_chain_serial', 'asc');
 
         return DataTables::of($query)
@@ -90,28 +94,27 @@ class ParticipantController extends Controller
             ->make(true);
     }
 
-// ExampleController.php
-public function participantsDashboard()
-{
-    $userPhone = Auth::user()->phone;
+    public function participantsDashboard()
+    {
+        $userPhone = Auth::user()->phone;
 
-    // matched participants for the current user (could be a collection)
-    $matched = DB::table('participants')
-                 ->where('phone', $userPhone)
-                 ->get(); // ->get() returns a Collection
+        // matched participants for the current user (could be a collection)
+        $matched = DB::table('participants')
+            ->where('phone', $userPhone)
+            ->get(); // ->get() returns a Collection
 
-    // other participants listing (unmatched grid)
-    $participants = DB::table('participants')
-                      ->whereNotNull('drive_image_file_id')
-                      ->limit(12)
-                      ->get();
+        // other participants listing (unmatched grid)
+        $participants = DB::table('participants')
+            ->whereNotNull('drive_image_file_id')
+            ->limit(12)
+            ->get();
 
-    return view('web.participants.dashboard', [
-        'matched' => $matched,
-        'participant_count' => $matched->count(),
-        'participants' => $participants,
-    ]);
-}
+        return view('web.participants.dashboard', [
+            'matched' => $matched,
+            'participant_count' => $matched->count(),
+            'participants' => $participants,
+        ]);
+    }
 
 
     public function create()
@@ -154,6 +157,8 @@ public function participantsDashboard()
             'image_library_file_no' => 'nullable|string',
             'video_library_file_no' => 'nullable|string',
             'video_chain_serial' => 'nullable|string',
+            'action_performed' => 'nullable|string',
+            'video_length' => 'nullable|string',
         ]);
 
         $validated['drive_video_file_id'] = $this->extractDriveId($validated['drive_video_file_id']);
@@ -188,6 +193,8 @@ public function participantsDashboard()
             'image_library_file_no' => 'nullable|string',
             'video_library_file_no' => 'nullable|string',
             'video_chain_serial' => 'nullable|string',
+            'action_performed' => 'nullable|string',
+            'video_length' => 'nullable|string',
         ]);
 
         $validated['drive_video_file_id'] = $this->extractDriveId($validated['drive_video_file_id']);

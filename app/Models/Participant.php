@@ -18,6 +18,8 @@ class Participant extends Model
         'image_library_file_no',
         'video_library_file_no',
         'video_chain_serial',
+        'action_performed',
+        'video_length',
     ];
 
     public function user()

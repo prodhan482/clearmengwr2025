@@ -130,8 +130,9 @@
 
                         <div class="info-card">
                             <h5><i class="fas fa-video fa-icon"></i> Drive Video</h5>
-                            @if($participant->drive_video_file_id)
-                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
+                            @if ($participant->drive_video_file_id)
+                                <iframe
+                                    src="https://drive.google.com/file/d/{{ $participant->drive_video_file_id }}/preview"
                                     width="100%" height="550" frameborder="0"
                                     allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen class="drive-link"
                                     style="border-radius:8px;"></iframe>
@@ -142,8 +143,9 @@
 
                         <div class="info-card">
                             <h5><i class="fas fa-image fa-icon"></i> Drive Image</h5>
-                            @if($participant->drive_image_file_id)
-                                <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview"
+                            @if ($participant->drive_image_file_id)
+                                <iframe
+                                    src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview"
                                     width="100%" height="550" frameborder="0"
                                     allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen class="drive-link"
                                     style="border-radius:8px;"></iframe>
@@ -167,18 +169,31 @@
                             <p>{{ $participant->video_library_file_no ?? 'N/A' }}</p>
                         </div>
 
+                       
+
                         <div class="info-card">
                             <h5><i class="fas fa-link fa-icon"></i> Video Chain Serial</h5>
                             <p>{{ $participant->video_chain_serial ?? 'N/A' }}</p>
                         </div>
 
                         <div class="info-card">
+                            <h5><i class="fas fa-clock fa-icon"></i> Video Length</h5>
+                            <p>{{ $participant->video_length ?? 'N/A' }}</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h5><i class="fas fa-running fa-icon"></i> Action Performed</h5>
+                            <p>{{ $participant->action_performed ?? 'N/A' }}</p>
+                        </div>
+
+
+                        {{-- <div class="info-card">
                             <h5><i class="fas fa-toggle-on fa-icon"></i> Status</h5>
                             <span class="status-badge {{ $participant->is_active ? 'active-badge' : 'inactive-badge' }}">
                                 <i class="fas {{ $participant->is_active ? 'fa-check' : 'fa-times' }}"></i>
                                 {{ $participant->is_active ? 'Active' : 'Inactive' }}
                             </span>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="mt-4 d-flex justify-content-center">

@@ -27,8 +27,11 @@ return new class extends Migration {
             $table->string('image_library_file_no')->nullable();
             $table->string('video_library_file_no')->nullable();
             $table->string('video_chain_serial')->nullable()->index();
+            $table->string('action_performed')->nullable();
+            $table->string('video_length')->nullable();
             $table->timestamps();
         });
+        
     }
 
     /**

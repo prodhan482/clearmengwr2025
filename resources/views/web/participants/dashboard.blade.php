@@ -20,21 +20,22 @@
                             Attempt)</strong>.
                     </p>
                 </div>
+                @foreach ($matched as $m)
 
                 <!-- Matched Participant Card -->
-                <div class="participant-card-bg view-attempts" data-name="{{ $participant->name }}"
-                    data-image="{{ $participant->drive_image_file_id }}" data-video="{{ $participant->drive_video_file_id }}">
+                <div class="participant-card-bg view-attempts" data-name="{{ $m->name }}"
+                    data-image="{{ $m->drive_image_file_id }}" data-video="{{ $m->drive_video_file_id }}">
 
-                    <iframe src="https://drive.google.com/file/d/{{ $participant->drive_image_file_id }}/preview?rm=minimal"
+                    <iframe src="https://drive.google.com/file/d/{{ $m->drive_image_file_id }}/preview?rm=minimal"
                         class="participant-bg-iframe" frameborder="0"></iframe>
 
                     <div class="play-icon">▶</div>
 
                     <div class="participant-overlay">
-                        <h1 class="participant-name">{{ $participant->name }}</h1>
+                        <h1 class="participant-name">{{ $m->name }}</h1>
                         <p class="participant-info text-white">
-                            Phone: {{ $participant->phone }} <br>
-                            Email: {{ $participant->email }}
+                            Phone: {{ $m->phone }} <br>
+                            Email: {{ $m->email }}
                         </p>
 
                         <div class="participant-button-wrapper">
@@ -45,6 +46,7 @@
                         </div>
                     </div>
                 </div>
+                  @endforeach
             </div>
         </section>
     @elseif($participant_count == 2)
